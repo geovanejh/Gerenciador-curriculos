@@ -19,8 +19,8 @@ export const ImageContainer = styled.div`
 `;
 
 export const AuthContent = styled.div`
-  width: 30%;
-  padding: 0 60px;
+  width: 40%;
+  padding: 0 5vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
