@@ -16,6 +16,22 @@ export const ImageContainer = styled.div`
     object-fit: cover;
     border-radius: 30px;
   }
+
+  > button {
+    position: absolute;
+    margin: 30px;
+    background-color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+
+    :hover {
+      background-color: black;
+      color: white;
+      cursor: pointer;
+    }
+  }
 `;
 
 export const AuthContent = styled.div`

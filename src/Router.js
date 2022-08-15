@@ -1,15 +1,41 @@
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Loading from "./components/Loading/Loading";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
+import { isAuth } from "./store/actions/AuthAction";
 
-const Router = () => {
-  return (
+const Router = ({ dispatch, auth }) => {
+  console.log(auth);
+  useEffect(() => {
+    isAuth(dispatch);
+  }, []);
+
+  return auth.isLoading === true ? (
+    <Loading />
+  ) : (
     <div>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Dashboard />} />
+        {auth.isLogged === true ? (
+          <>
+            <Route path="/" element={<Dashboard />} />
+          </>
+        ) : (
+          <>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<Navigate to="/login" />} />
+          </>
+        )}
       </Routes>
     </div>
   );
 };
-export default Router;
+
+const mapStateToProps = (state) => ({
+  auth: state.AuthReducer,
+});
+
+export default connect(mapStateToProps)(Router);

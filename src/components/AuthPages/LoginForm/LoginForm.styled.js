@@ -22,9 +22,8 @@ export const AuthForm = styled.form`
   display: flex;
   width: 100%;
   flex-direction: column;
-  align-items: center;
   margin-top: 48px;
-  gap: 12px;
+  gap: 24px;
 
   > button {
     margin-top: 18px;
