@@ -1,13 +1,26 @@
-import styled from "styled-components";
+import { Label } from "../Label.styled";
+import { AuthInputStyles, AuthInputField } from "./AuthInput.styled";
 
-export const AuthInput = styled.input`
-  border: none;
-  border-bottom: 1px solid #a6acb6;
-  padding: 12px 0;
-  font-size: 16px;
-  width: 85%;
-
-  :focus {
-    outline: none;
-  }
-`;
+const AuthInput = ({ label, formik, id, onChange, onBlur, value, type }) => {
+  const field = formik.getFieldMeta(id);
+  const props = formik.getFieldProps(id);
+  return (
+    <AuthInputStyles>
+      <Label htmlFor={id} errors={field.error} touched={field.touched}>
+        {label}
+      </Label>
+      <AuthInputField
+        id={id}
+        name={id}
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+        type={type}
+        errors={field.error}
+        touched={field.touched}
+      />
+      {field.touched && field.error ? <span>{field.error}</span> : null}
+    </AuthInputStyles>
+  );
+};
+export default AuthInput;

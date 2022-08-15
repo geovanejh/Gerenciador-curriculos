@@ -2,9 +2,10 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { handleLogin } from "../../../store/actions/AuthAction";
 import { Button } from "../../Button/Button.styled";
-import { AuthInput } from "../../Forms/AuthFormField/AuthInput";
+import AuthInput from "../../Forms/AuthFormField/AuthInput";
 import { AuthForm, LoginContainer } from "./LoginForm.styled";
 import { connect } from "react-redux";
+import * as Yup from "yup";
 
 const LoginForm = ({ dispatch }) => {
   const navigate = useNavigate();
@@ -17,6 +18,10 @@ const LoginForm = ({ dispatch }) => {
     onSubmit: (values) => {
       handleLogin(values, dispatch, navigate);
     },
+    validationSchema: Yup.object({
+      email: Yup.string().required("- OBRIGATÓRIO"),
+      senha: Yup.string().required("- Obrigatório"),
+    }),
   });
 
   return (
@@ -25,6 +30,7 @@ const LoginForm = ({ dispatch }) => {
       <h5>Digite seu login e senha abaixo</h5>
       <AuthForm onSubmit={formik.handleSubmit}>
         <AuthInput
+          label="Email*"
           placeholder="Email*"
           id="email"
           type="text"
@@ -34,6 +40,7 @@ const LoginForm = ({ dispatch }) => {
           formik={formik}
         />
         <AuthInput
+          label="Senha*"
           placeholder="Senha*"
           id="senha"
           type="password"
