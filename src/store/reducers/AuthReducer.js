@@ -13,9 +13,11 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
       isLoading: action.isLoading,
     };
   }
+
   if (action.type === "SET_LOGOUT") {
     return { ...state, token: "", isLogged: false };
   }
+  
   return state;
 };
 
