@@ -1,10 +1,8 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { Routes, Route, Navigate } from "react-router-dom";
-import Logo from "./components/Header/Logo";
+import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
 import Loading from "./components/Loading/Loading";
-import CandidatoForm from "./pages/CandidatoForm";
-import Candidatos from "./pages/Candidatos";
+import ApplicantDetails from "./pages/ApplicantDetails";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -25,13 +23,12 @@ const Router = ({ dispatch, auth }) => {
         {auth.isLogged === true ? (
           <>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/candidatos" element={<Candidatos />} />
-            <Route path="/candidatos/novo" element={<CandidatoForm />} />
+            <Route path="/candidato/:id" element={<ApplicantDetails />} />
           </>
         ) : (
           <>
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="register" element={<Register />} />
             <Route path="*" element={<Navigate to="/login" />} />
           </>
         )}

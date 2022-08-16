@@ -16,7 +16,12 @@ const Login = ({ loading }) => {
   return loading ? (
     <Loading />
   ) : (
-    <AuthPages img={imgPlaceholder} form={<LoginForm />} handleButton={handleButton} button="Registrar" />
+    <AuthPages
+      img={imgPlaceholder}
+      form={<LoginForm />}
+      handleButton={handleButton}
+      button="Registrar"
+    />
   );
 };
 
