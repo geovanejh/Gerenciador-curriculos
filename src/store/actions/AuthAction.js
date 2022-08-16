@@ -19,7 +19,7 @@ export const handleLogin = async (values, dispatch, navigate) => {
 
     navigate("/");
   } catch (error) {
-    alert(error);
+    toast.error(`Usuário incorreto ou inexistente!`);
   }
   setLoading(dispatch);
 };

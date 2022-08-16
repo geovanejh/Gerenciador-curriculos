@@ -19,7 +19,7 @@ const LoginForm = ({ dispatch }) => {
       handleLogin(values, dispatch, navigate);
     },
     validationSchema: Yup.object({
-      email: Yup.string().required("- OBRIGATÓRIO"),
+      email: Yup.string().email("- Email inválido").required("- OBRIGATÓRIO"),
       senha: Yup.string().required("- Obrigatório"),
     }),
   });

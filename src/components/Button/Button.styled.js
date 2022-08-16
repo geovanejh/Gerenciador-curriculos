@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  background: ${(props) => (props.primary ? (props.disabled ? "gray" : "#111727") : props.background)};
+  background: ${(props) => (props.primary ? (props.disabled ? "gray" : "#1AB24E") : props.background)};
   border-radius: ${(props) => (props.primary ? "50px" : props.borderRadius)};
   padding: ${(props) => (props.primary ? "14px 24px" : props.padding)};
   border: ${(props) => (props.primary ? "none" : props.border)};
@@ -13,4 +13,8 @@ export const Button = styled.button`
   letter-spacing: 0.2px;
   color: ${(props) => (props.primary ? "#fff" : props.color)};
   cursor: pointer;
+
+  :hover {
+    background-color: #13a06d;
+  }
 `;

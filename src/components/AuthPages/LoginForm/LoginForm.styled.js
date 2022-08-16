@@ -9,6 +9,7 @@ export const LoginContainer = styled.div`
   h2 {
     font-weight: 700;
     font-size: 32px;
+    color: #1ab24e;
   }
 
   h5 {

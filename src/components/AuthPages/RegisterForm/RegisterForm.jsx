@@ -42,7 +42,7 @@ const RegisterForm = ({ dispatch }) => {
     <LoginContainer>
       <h2>Registre uma conta</h2>
       <h5>Digite seu email e senha abaixo</h5>
-      <AuthForm onSubmit={formik.handleSubmit}>
+      <AuthForm onSubmit={formik.handleSubmit} autoComplete="off">
         <AuthInput
           label="Email*"
           placeholder="Email*"

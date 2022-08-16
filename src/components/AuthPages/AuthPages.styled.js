@@ -27,7 +27,7 @@ export const ImageContainer = styled.div`
     font-weight: 700;
 
     :hover {
-      background-color: black;
+      background-color: #1ab24e;
       color: white;
       cursor: pointer;
     }
