@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Logo from "./components/Header/Logo";
 import Loading from "./components/Loading/Loading";
 import ApplicantDetails from "./pages/ApplicantDetails";
