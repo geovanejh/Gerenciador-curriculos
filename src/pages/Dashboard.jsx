@@ -14,7 +14,7 @@ const Dashboard = ({ loading, dispatch }) => {
     <Loading />
   ) : (
     <div>
-      <DashboardContainer style={{ backgroundColor: "#f4f2f2" }}>
+      <DashboardContainer>
         <ListOpenJobs />
       </DashboardContainer>
       <button onClick={() => handleLogout(dispatch, navigate)}>deslogar</button>
