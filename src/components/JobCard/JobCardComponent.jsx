@@ -8,9 +8,10 @@ const JobCardComponent = ({ job }) => {
       <List>
         <Item color="black">Título: {job.title}</Item>
         <Item>Região: {job.region}</Item>
+        <Item>Tipo de contratação: {job.contractType}</Item>
         <Item>
           Senioridade:
-          <SeniorityTag seniority={job.seniority}>{job.seniority}</SeniorityTag>
+          {/* <SeniorityTag seniority={job.seniority}>{job.seniority}</SeniorityTag> */}
         </Item>
       </List>
       <ModalApplicantComponent jobId={job.id} />
