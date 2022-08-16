@@ -20,4 +20,5 @@ const mapFields = (data) => ({
   title: data.Titulo,
   region: `${data.Estado} - ${data.Cidade}`,
   contractType: data.TipoContratacao,
+  category: data.Categoria,
 });
