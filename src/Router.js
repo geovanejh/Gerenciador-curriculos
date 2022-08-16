@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Routes, Route, Navigate, BrowserRouter } from "react-router-dom";
+import Logo from "./components/Header/Logo";
 import Loading from "./components/Loading/Loading";
 import ApplicantDetails from "./pages/ApplicantDetails";
+import CandidatoForm from "./pages/CandidatoForm";
+import Candidatos from "./pages/Candidatos";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -24,6 +27,8 @@ const Router = ({ dispatch, auth }) => {
           <>
             <Route path="/" element={<Dashboard />} />
             <Route path="/candidato/:id" element={<ApplicantDetails />} />
+            <Route path="/candidatos/" element={<Candidatos />} />
+            <Route path="/candidatos/novo" element={<CandidatoForm />} />
           </>
         ) : (
           <>
