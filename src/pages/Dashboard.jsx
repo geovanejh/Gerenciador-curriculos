@@ -1,20 +1,12 @@
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading/Loading";
-import { handleLogout } from "../store/actions/AuthAction";
 
 const Dashboard = ({ loading, dispatch }) => {
   const navigate = useNavigate();
   console.log(loading);
 
-  return loading ? (
-    <Loading />
-  ) : (
-    <div>
-      Dashboard
-      <button onClick={() => handleLogout(dispatch, navigate)}>deslogar</button>
-    </div>
-  );
+  return loading ? <Loading /> : <div>Dashboard</div>;
 };
 
 const mapStateToProps = (state) => ({
