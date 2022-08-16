@@ -1,5 +1,6 @@
 import api from "../../api";
 import { setLoading } from "./UtilsAction";
+import { toast } from "react-toastify";
 
 export const handleLogin = async (values, dispatch, navigate) => {
   setLoading(dispatch);
@@ -15,7 +16,7 @@ export const handleLogin = async (values, dispatch, navigate) => {
       isLogged: true,
       isLoading: false,
     });
-    
+
     navigate("/");
   } catch (error) {
     alert(error);
@@ -26,6 +27,7 @@ export const handleLogin = async (values, dispatch, navigate) => {
 export const handleLogout = (dispatch, navigate) => {
   localStorage.removeItem("token");
   delete api.defaults.headers.common["Authorization"];
+
   dispatch({
     type: "SET_LOGOUT",
   });
@@ -36,9 +38,13 @@ export const handleRegister = async (values, dispatch, navigate) => {
   setLoading(dispatch);
   try {
     const { data } = await api.post(`/login/criar-usuario`, values);
+    toast.success("Registrado com sucesso!");
     navigate("/login");
   } catch (error) {
-    alert(error);
+    error.response.data.errors.map((e) => {
+      toast.error(`Um erro aconteceu! 
+      ${e}`);
+    });
   }
   setLoading(dispatch);
 };
