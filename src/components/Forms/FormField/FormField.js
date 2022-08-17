@@ -2,7 +2,7 @@ import { Label } from "../Label.styled";
 import { Input } from "../Input.styled";
 import { Fields } from "./FormField.styled";
 
-const FormField = ({ label, id, type, onChange, onBlur, placeholder, formik, width }) => {
+const FormField = ({ label, id, type, onChange, onBlur, placeholder, formik, width, value }) => {
   const field = formik.getFieldMeta(id);
   const props = formik.getFieldProps(id);
 
@@ -18,7 +18,7 @@ const FormField = ({ label, id, type, onChange, onBlur, placeholder, formik, wid
         placeholder={placeholder}
         width={width}
         onChange={onChange}
-        value={props.value}
+        value={value}
         onBlur={onBlur}
         errors={field.error}
         touched={field.touched}

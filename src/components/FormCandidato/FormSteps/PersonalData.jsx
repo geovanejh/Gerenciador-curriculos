@@ -5,7 +5,7 @@ import SelectField from "../../Forms/SelectField/SelectField";
 const PersonalData = ({ formik }) => {
   return (
     <>
-      <FormRow grid="1fr 1fr 0.5fr 0.5fr">
+      <FormRow grid="1fr 1fr 0.5fr">
         <FormField
           label="Nome"
           placeholder="Ex: João da Silva"
@@ -36,6 +36,8 @@ const PersonalData = ({ formik }) => {
           onBlur={formik.handleBlur}
           formik={formik}
         />
+      </FormRow>
+      <FormRow grid="0.5fr 1fr 0.5fr">
         <FormField
           label="telefone"
           placeholder="(00)00000-0000"
@@ -46,8 +48,6 @@ const PersonalData = ({ formik }) => {
           onBlur={formik.handleBlur}
           formik={formik}
         />
-      </FormRow>
-      <FormRow grid="1fr 0.2fr">
         <FormField
           label="cargo"
           placeholder="Ex: Desenvolvedor iOS Sênior"
@@ -70,6 +70,15 @@ const PersonalData = ({ formik }) => {
           onBlur={formik.handleBlur}
         />
       </FormRow>
+      <input
+        type="file"
+        name="personalFile"
+        onBlur={formik.handleBlur}
+        id="personalFile"
+        onChange={(event) => {
+          formik.setFieldValue("personalFile", event.currentTarget.files[0]);
+        }}
+      />
     </>
   );
 };

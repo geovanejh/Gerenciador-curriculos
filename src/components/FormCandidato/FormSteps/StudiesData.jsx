@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "../../Button/Button.styled";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
@@ -77,6 +76,7 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
               id="instituicao"
               type="text"
               name="instituicao"
+              value={item.instituicao}
               placeholder="instituicao"
               onBlur={formik.handleBlur}
               onChange={(e) => onChange(index, e)}
