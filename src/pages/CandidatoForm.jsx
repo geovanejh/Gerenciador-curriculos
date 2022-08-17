@@ -15,14 +15,10 @@ const CandidatoForm = () => {
   ]);
 
   const formik = useFormik({
-    initialValues: {
-      um: "",
-      dois: "",
-      tres: "",
-      quatro: "",
-    },
+    initialValues: {},
     onSubmit: (values) => {
       console.log("values: ", values);
+      console.log("escolaridade: ", escolaridade);
     },
   });
 

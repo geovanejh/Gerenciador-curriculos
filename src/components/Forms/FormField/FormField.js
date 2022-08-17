@@ -5,6 +5,7 @@ import { Fields } from "./FormField.styled";
 const FormField = ({ label, id, type, onChange, onBlur, placeholder, formik, width }) => {
   const field = formik.getFieldMeta(id);
   const props = formik.getFieldProps(id);
+
   return (
     <Fields>
       <Label htmlFor={id} errors={field.error} touched={field.touched}>

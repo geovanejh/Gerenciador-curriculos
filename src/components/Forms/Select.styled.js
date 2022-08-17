@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Input = styled.input`
+export const Select = styled.select`
   background: #fcfdfe;
   border: ${(props) => (props.errors && props.touched ? "1px solid red" : "1px solid #9fa2b4")};
   border-radius: 8px;
@@ -9,6 +9,7 @@ export const Input = styled.input`
   height: 42px;
 
   ::placeholder {
+    color: red;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;

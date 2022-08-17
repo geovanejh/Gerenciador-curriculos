@@ -1,3 +1,4 @@
+import { Button } from "../../Button/Button.styled";
 import AddressData from "../FormSteps/AddressData";
 import ExperienceData from "../FormSteps/ExperienceData";
 import PersonalData from "../FormSteps/PersonalData";
@@ -27,12 +28,12 @@ const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade })
         {step === 3 && <StudiesData formik={formik} escolaridade={escolaridade} setEscolaridade={setEscolaridade} />}
         {step === 4 && <ExperienceData formik={formik} />}
         <ButtonContainer>
-          <button type="button" onClick={decrementaStep}>
+          <Button type="button" primary onClick={decrementaStep}>
             Voltar
-          </button>
-          <button type="button " onClick={incrementaStep}>
+          </Button>
+          <Button type="button" primary onClick={incrementaStep}>
             Próximo
-          </button>
+          </Button>
         </ButtonContainer>
       </FormContainer>
     </SteppedForm>
