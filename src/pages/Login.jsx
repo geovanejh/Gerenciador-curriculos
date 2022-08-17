@@ -7,7 +7,6 @@ import Loading from "../components/Loading/Loading";
 const Login = ({ loading }) => {
   const navigate = useNavigate();
   const imgPlaceholder = `https://images.sympla.com.br/61f959d748945.png`;
-  console.log("a", loading);
 
   const handleButton = () => {
     navigate("/register");

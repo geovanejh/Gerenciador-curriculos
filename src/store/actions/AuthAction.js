@@ -41,10 +41,12 @@ export const handleRegister = async (values, dispatch, navigate) => {
     toast.success("Registrado com sucesso!");
     navigate("/login");
   } catch (error) {
-    error.response.data.errors.map((e) => {
-      toast.error(`Um erro aconteceu! 
-      ${e}`);
-    });
+    if (error.response.data.errors) {
+      error.response.data.errors.map((e) => {
+        toast.error(`Um erro aconteceu! 
+        ${e}`);
+      });
+    }
   }
   setLoading(dispatch);
 };

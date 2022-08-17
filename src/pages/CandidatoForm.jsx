@@ -1,14 +1,18 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import FormCandidato from "../components/FormCandidato/FormCandidato/FormCandidato";
-import AddressData from "../components/FormCandidato/FormSteps/AddressData";
-import ExperienceData from "../components/FormCandidato/FormSteps/ExperienceData";
-import PersonalData from "../components/FormCandidato/FormSteps/PersonalData";
-import StudiesData from "../components/FormCandidato/FormSteps/StudiesData";
-import Stepper from "../components/FormCandidato/Stepper/Stepper";
 
 const CandidatoForm = () => {
   const [step, setStep] = useState(1);
+  const [escolaridade, setEscolaridade] = useState([
+    {
+      instituicao: "",
+      descricao: "",
+      nivel: "",
+      dataInicio: "",
+      dataFim: "",
+    },
+  ]);
 
   const formik = useFormik({
     initialValues: {
@@ -22,6 +26,14 @@ const CandidatoForm = () => {
     },
   });
 
-  return <FormCandidato step={step} setStep={setStep} formik={formik}></FormCandidato>;
+  return (
+    <FormCandidato
+      step={step}
+      setStep={setStep}
+      formik={formik}
+      escolaridade={escolaridade}
+      setEscolaridade={setEscolaridade}
+    ></FormCandidato>
+  );
 };
 export default CandidatoForm;

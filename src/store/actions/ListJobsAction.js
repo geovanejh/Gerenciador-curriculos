@@ -11,6 +11,7 @@ export const HandleListJobs = async (dispatch) => {
       isLoading: false,
     });
   } catch (error) {
+    console.log(error);
     toast.error("Erro ao buscar vagas");
   }
 };
