@@ -1,17 +1,29 @@
-import api from "../../api";
-import { toast } from "react-toastify";
+import api from '../../api';
+import { toast } from 'react-toastify';
 
-export const HandleListJobs = async (dispatch) => {
+export const HandleListJobs = async (
+  dispatch,
+  pageNumber = 1,
+  pageLength = 10
+) => {
   try {
-    const { data } = await api.get("/vaga/pagina=1/quantidade=10");
+    const { data } = await api.get(
+      `/vaga/pagina=${pageNumber}/quantidade=${pageLength}`
+    );
+
+    const jobsPaginated = {
+      jobs: data.vagaGeralList.map(mapFields),
+      currentPage: data.pagina,
+      totalPages: data.paginas,
+    }
 
     dispatch({
-      type: "LIST_JOBS",
-      jobs: data.vagaGeralList.map(mapFields),
+      type: 'LIST_JOBS',
+      jobs: jobsPaginated,
       isLoading: false,
     });
   } catch (error) {
-    toast.error("Erro ao buscar vagas");
+    toast.error('Erro ao buscar vagas');
   }
 };
 
@@ -21,4 +33,5 @@ const mapFields = (data) => ({
   region: `${data.Estado} - ${data.Cidade}`,
   contractType: data.TipoContratacao,
   category: data.Categoria,
+  tags: data.Tags,
 });

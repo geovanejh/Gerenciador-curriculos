@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  jobs: [],
+  jobs: { jobs: [], currentPage: 1, totalPages: 0 },
   isLoading: true,
 };
 

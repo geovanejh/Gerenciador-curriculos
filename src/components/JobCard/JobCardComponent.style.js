@@ -9,11 +9,28 @@ const Card = styled.div`
   margin: 10px 0;
   padding: 13px;
   width: 32em;
+
+  @media (max-width: 768px) {
+    margin: 2px 0;
+    padding: 13px;
+    width: 44em;
+    @media (max-width: 576px) {
+      width: 32em;
+      margin: 2px 0;
+      padding: 13px;
+    }
+  }
 `;
 
 const List = styled.ul`
   list-style-type: none;
   padding: 10px 10px 16px 0;
+  @media (max-width: 768px) {
+    font-size: 30px;
+    @media (max-width: 576px) {
+      font-size: 20px;
+    }
+  }
 `;
 
 const Item = styled.li`

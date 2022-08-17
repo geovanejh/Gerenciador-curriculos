@@ -1,12 +1,20 @@
-import { connect } from 'react-redux';
-import { useEffect } from 'react';
+import { connect } from "react-redux";
+import { useEffect } from "react";
 
-import { HandleListJobs } from '../../store/actions/ListJobsAction';
-import JobCardComponent from '../JobCard/JobCardComponent';
+import { HandleListJobs } from "../../store/actions/ListJobsAction";
+import JobCardComponent from "../JobCard/JobCardComponent";
 
-import { Container } from './ListOpenJobsComponent.style';
+import {
+  Container,
+  PaginationContainer,
+  Msg,
+} from "./ListOpenJobsComponent.style";
 
 const ListOpenJobs = ({ jobs, dispatch }) => {
+  const handleLoadPage = (page) => {
+    HandleListJobs(dispatch, page.selected + 1);
+  };
+
   const setup = async () => {
     HandleListJobs(dispatch);
   };
@@ -17,8 +25,22 @@ const ListOpenJobs = ({ jobs, dispatch }) => {
 
   return (
     <Container>
+      <Msg>Lista de vagas</Msg>
       {jobs &&
-        jobs.map((job, index) => <JobCardComponent job={job} key={index} />)}
+        jobs.jobs.map((job, index) => (
+          <JobCardComponent job={job} key={index} />
+        ))}
+      <div>
+        <PaginationContainer
+          breakLabel="..."
+          nextLabel="Próx >"
+          onPageChange={handleLoadPage}
+          pageRangeDisplayed={5}
+          pageCount={jobs.totalPages | 0}
+          previousLabel="< Ant"
+          renderOnZeroPageCount={null}
+        />
+      </div>
     </Container>
   );
 };
