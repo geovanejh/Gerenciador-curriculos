@@ -1,5 +1,5 @@
-import api from '../../api';
-import { toast } from 'react-toastify';
+import api from "../../api";
+import { toast } from "react-toastify";
 
 export const HandleListJobs = async (
   dispatch,
@@ -15,15 +15,15 @@ export const HandleListJobs = async (
       jobs: data.vagaGeralList.map(mapFields),
       currentPage: data.pagina,
       totalPages: data.paginas,
-    }
+    };
 
     dispatch({
-      type: 'LIST_JOBS',
+      type: "LIST_JOBS",
       jobs: jobsPaginated,
       isLoading: false,
     });
   } catch (error) {
-    toast.error('Erro ao buscar vagas');
+    toast.error("Erro ao buscar vagas");
   }
 };
 

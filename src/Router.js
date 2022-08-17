@@ -12,7 +12,6 @@ import Register from "./pages/Register";
 import { isAuth } from "./store/actions/AuthAction";
 
 const Router = ({ dispatch, auth }) => {
-  console.log(auth);
   useEffect(() => {
     isAuth(dispatch);
   }, []);
