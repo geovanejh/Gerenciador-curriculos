@@ -1,7 +1,6 @@
 import { Button } from "../../Button/Button.styled";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
-import SelectField from "../../Forms/SelectField/SelectField";
 
 const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
   const handleAddLink = (e) => {
