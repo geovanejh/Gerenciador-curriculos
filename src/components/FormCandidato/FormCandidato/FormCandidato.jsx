@@ -1,3 +1,4 @@
+import { Button } from "../../Button/Button.styled";
 import AddressData from "../FormSteps/AddressData";
 import ExperienceData from "../FormSteps/ExperienceData";
 import PersonalData from "../FormSteps/PersonalData";
@@ -5,7 +6,7 @@ import StudiesData from "../FormSteps/StudiesData";
 import Stepper from "../Stepper/Stepper";
 import { ButtonContainer, FormContainer, SteppedForm } from "./FormCandidato.styled";
 
-const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade }) => {
+const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade, experiencia, setExperiencia }) => {
   const incrementaStep = () => {
     if (step <= 3) {
       setStep(step + 1);
@@ -25,14 +26,14 @@ const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade })
         {step === 1 && <PersonalData formik={formik} />}
         {step === 2 && <AddressData formik={formik} />}
         {step === 3 && <StudiesData formik={formik} escolaridade={escolaridade} setEscolaridade={setEscolaridade} />}
-        {step === 4 && <ExperienceData formik={formik} />}
+        {step === 4 && <ExperienceData formik={formik} experiencia={experiencia} setExperiencia={setExperiencia} />}
         <ButtonContainer>
-          <button type="button" onClick={decrementaStep}>
+          <Button type="button" primary onClick={decrementaStep}>
             Voltar
-          </button>
-          <button type="button " onClick={incrementaStep}>
+          </Button>
+          <Button type="button" primary onClick={incrementaStep}>
             Próximo
-          </button>
+          </Button>
         </ButtonContainer>
       </FormContainer>
     </SteppedForm>
