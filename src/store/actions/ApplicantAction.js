@@ -7,6 +7,7 @@ export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
     const { data } = await api.get(
       `/candidato/get-candidato/{idCandidato}?idCandidato=${idCanditado}`
     );
+    debugger;
 
     const applicant = {
       type: "DETAIL_APPLICANT",
@@ -16,6 +17,7 @@ export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
 
     dispatch(applicant);
   } catch (error) {
+    console.log(error);
     toast.error("Erro ao buscar cadanditado");
   }
 };
@@ -73,7 +75,14 @@ const mapFields = (data) => ({
   id: data.idCandidato,
   name: data.nome.toLowerCase(),
   cpf: data.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4"),
+  birthdate: data.dataNascimento,
+  phoneNumber: data.telefone,
+  seniority: data.senioridade,
+  role: data.cargo,
+  resumeUrl: data.curriculoUrl,
   address: {
+    number: data.endereco.numero,
+    street: data.endereco.logradouro,
     neighborhood: data.endereco.bairro,
     city: data.endereco.cidade,
   },

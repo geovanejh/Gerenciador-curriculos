@@ -21,11 +21,35 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
           <Group>
             <Field>Nome: {applicant.name}</Field>
             <Field>CPF: {applicant.cpf}</Field>
+            <Field>Data de nascimento: {applicant.birthdate}</Field>
+            <Field>Numero de telefone: {applicant.phoneNumber}</Field>
+            <Field>Senioridade: {applicant.seniority}</Field>
+            <Field>Cargo: {applicant.role}</Field>
+            <Field>
+              Curriculo: <a href={applicant.resumeUrl}>Download</a>{" "}
+            </Field>
           </Group>
           <Group>
             Endereço
+            <Field>Número: {applicant.address?.number}</Field>
+            <Field>Rua: {applicant.address?.street}</Field>
             <Field>Bairro: {applicant.address?.neighborhood}</Field>
             <Field>Cidade: {applicant.address?.city}</Field>
+          </Group>
+          Escolaridade:
+          <Group>
+            <Field>Instituição: {applicant.education?.institute}</Field>
+            <Field>Descrição: {applicant.education?.drescription}</Field>
+            <Field>Data de início: {applicant.education?.startDate}</Field>
+            <Field>Data de fim: {applicant.education?.endDate}</Field>
+          </Group>
+          Experiência:
+          <Group>
+            <Field>Instituição: {applicant.experience?.institute}</Field>
+            <Field>Descrição: {applicant.experience?.drescription}</Field>
+            <Field>Cargo: {applicant.experience?.role}</Field>
+            <Field>Data de início: {applicant.experience?.startDate}</Field>
+            <Field>Data de fim: {applicant.experience?.endDate}</Field>
           </Group>
         </Card>
       )}
