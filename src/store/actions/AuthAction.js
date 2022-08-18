@@ -46,6 +46,8 @@ export const handleRegister = async (values, dispatch, navigate) => {
         toast.error(`Um erro aconteceu! 
         ${e}`);
       });
+    } else {
+      toast.error("Um erro aconteceu.");
     }
   }
   setLoading(dispatch);
