@@ -4,7 +4,6 @@ import Loading from "../components/Loading/Loading";
 import { handleLogout } from "../store/actions/AuthAction";
 import ListOpenJobs from "../components/ListOpenJobs/ListOpenJobsComponent";
 import DashboardContainer from "./Dashboard.style";
-import { toast } from "react-toastify";
 
 const Dashboard = ({ loading, dispatch }) => {
   const navigate = useNavigate();

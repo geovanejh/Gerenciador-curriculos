@@ -14,10 +14,27 @@ const Card = styled.div`
     margin: 2px 0;
     padding: 13px;
     width: 44em;
-    @media (max-width: 576px) {
-      width: 32em;
-      margin: 2px 0;
-      padding: 13px;
+  }
+  @media (max-width: 576px) {
+    width: 32em;
+    margin: 2px 0;
+    padding: 13px;
+  }
+  @media (max-width: 375px) {
+    width: 90%;
+  }
+  @media (max-width: 414px) {
+    width: 90%;
+  }
+  @media (max-width: 820px) {
+    width: 95%;
+    font-size: 30px;
+  }
+  @media (max-width: 912px) {
+    width: 95%;
+    font-size: 30px;
+    button {
+      font-size: 20px;
     }
   }
 `;

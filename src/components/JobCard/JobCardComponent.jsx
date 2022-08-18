@@ -2,7 +2,7 @@ import ModalApplicantComponent from "../ModalApplicant/ModalApplicantComponent";
 
 import { Card, List, Item } from "./JobCardComponent.style";
 
-const JobCardComponent = ({ job }) => {
+const JobCardComponent = ({ job, applicants }) => {
   return job ? (
     <Card>
       <List>
@@ -11,7 +11,7 @@ const JobCardComponent = ({ job }) => {
         <Item>Categoria: {job.category ? job.category : "Sem categoria"}</Item>
         <Item>Tag: {job.tags ? job.tags : "Sem tag"}</Item>
       </List>
-      <ModalApplicantComponent jobId={job.id} />
+      <ModalApplicantComponent applicants={applicants} jobId={job.id} />
     </Card>
   ) : (
     "Nao há vagas cadastradas"
