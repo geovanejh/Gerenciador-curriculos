@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FormRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: ${(props) => (props.grid ? props.grid : "1fr")};
+  gap: 16px;
 `;
