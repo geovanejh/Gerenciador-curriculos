@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { connect } from "react-redux";
-import { toast } from 'react-toastify';
-import Modal from 'react-modal';
+import { toast } from "react-toastify";
+import Modal from "react-modal";
 
-import { HandleAddAplicantToJob } from '../../store/actions/ApplicantAction';
-import { ButtonTag, Info, CardFechar } from './ModalApplicantComponent.style';
+import { HandleAddAplicantToJob } from "../../store/actions/ApplicantAction";
+import { ButtonTag, Info, CardFechar } from "./ModalApplicantComponent.style";
 
 const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,14 +12,14 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
 
   const customStyles = {
     content: {
-      width: '80%',
-      height: '60%',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
+      width: "50%",
+      height: "60%",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
     },
   };
 

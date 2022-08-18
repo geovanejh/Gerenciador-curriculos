@@ -4,11 +4,16 @@ const Info = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
-  padding: 10px;
+  padding: 15px;
 
   border-radius: 5px;
   border: 1px solid green;
   cursor: pointer;
+  flex-direction: column;
+  align-items: flex-start;
+  span {
+    margin: 3px 0;
+  }
   :hover {
     background-color: #00800044;
   }
@@ -56,7 +61,9 @@ const CardFechar = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-end;
+  position: sticky;
+  top: -15px;
 `;
 
 export { ButtonTag, Info, CardFechar };
