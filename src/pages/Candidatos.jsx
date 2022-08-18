@@ -25,7 +25,6 @@ const Candidatos = ({ dispatch, applicants }) => {
           <p>senioridade</p>
           <p>data de nascimento</p>
         </li>
-
         {applicants.map((e) => (
           <li>
             <p>{e.name}</p>
