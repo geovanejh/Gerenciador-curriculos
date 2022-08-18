@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
-import FormCandidato from "../components/FormCandidato/FormCandidato/FormCandidato";
 import api from "../api";
+import FormCandidato from "../components/FormCandidato/FormCandidato/FormCandidato";
 
 const CandidatoForm = () => {
   const [step, setStep] = useState(1);
@@ -17,12 +17,7 @@ const CandidatoForm = () => {
   const [experiencia, setExperiencia] = useState([]);
 
   const formik = useFormik({
-    initialValues: {
-      um: "",
-      dois: "",
-      tres: "",
-      quatro: "",
-    },
+    initialValues: {},
     onSubmit: (values) => {
       console.log("values: ", values);
       console.log("escolaridade: ", escolaridade);
@@ -47,7 +42,13 @@ const CandidatoForm = () => {
 
       const formData = new FormData();
       const imagefile = values.personalFile;
-      formData.append("candidato", JSON.stringify(newObj));
+      formData.append(
+        "candidato",
+        new Blob([JSON.stringify(newObj)], {
+          type: "application/json",
+        })
+      );
+      // formData.append("candidato", JSON.stringify(newObj));
       formData.append("documento", imagefile);
 
       try {
@@ -68,9 +69,9 @@ const CandidatoForm = () => {
       setStep={setStep}
       formik={formik}
       escolaridade={escolaridade}
+      setEscolaridade={setEscolaridade}
       experiencia={experiencia}
       setExperiencia={setExperiencia}
-      setEscolaridade={setEscolaridade}
     ></FormCandidato>
   );
 };

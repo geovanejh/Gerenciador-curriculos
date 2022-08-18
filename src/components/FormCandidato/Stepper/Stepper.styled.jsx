@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StepperContainer = styled.div`
-  width: 1200px;
+  width: 900px;
   padding: 12px;
   display: flex;
   gap: 32px;

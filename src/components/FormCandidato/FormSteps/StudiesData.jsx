@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { Button } from "../../Button/Button.styled";
+import FormField from "../../Forms/FormField/FormField";
+import { FormRow } from "../../Forms/FormRow";
+import SelectField from "../../Forms/SelectField/SelectField";
 
 const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
   const handleAddLink = (e) => {
@@ -41,66 +44,81 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
   return (
     <>
       {escolaridade.map((item, index) => (
-        <div key={`item-${index}`}>
-          <div>
-            <label htmlFor="instituicao">Instituição de ensino</label>
-            <input
+        <>
+          <FormRow grid="0.5fr 1fr">
+            <SelectField
+              options={[
+                { id: "TECNICO", nome: "Técnico" },
+                { id: "SUPERIOR", nome: "Superior" },
+              ]}
+              label="Nível"
               type="text"
-              name="instituicao"
-              placeholder="instituicao"
-              value={item.instituicao}
+              id="nivel"
+              name="nivel"
               onChange={(e) => onChange(index, e)}
+              value={item.nivel}
             />
-          </div>
-          <div>
-            <label htmlFor="dataInicio">Descrição</label>
-            <input
+            <FormField
+              label="Curso"
+              formik={formik}
+              id="descricao"
               type="text"
               name="descricao"
-              placeholder="descricao"
+              placeholder="Ex: Análise e Desenvolvimento de Sistemas"
               value={item.descricao}
               onChange={(e) => onChange(index, e)}
             />
-          </div>
-          <div>
-            <label htmlFor="nivel">nivel</label>
-            <select type="text" id="nivel" name="nivel" onChange={(e) => onChange(index, e)} value={item.nivel}>
-              <option value="fundamental">Fundamental</option>
-              <option value="medio">Médio</option>
-              <option value="superior">Superior</option>
-              <option value="tecnico">Técnico</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="dataInicio">Data de início</label>
-            <input
+          </FormRow>
+          <FormRow grid="1fr 0.3fr 0.5fr 0.1fr">
+            <FormField
+              label="instituicao"
+              formik={formik}
+              id="instituicao"
+              type="text"
+              name="instituicao"
+              value={item.instituicao}
+              placeholder="instituicao"
+              onBlur={formik.handleBlur}
+              onChange={(e) => onChange(index, e)}
+            />
+            <FormField
+              label="Data de Início"
+              formik={formik}
+              id="dataInicio"
               type="text"
               name="dataInicio"
-              placeholder="Data de início"
+              placeholder="00/00/0000"
               value={item.dataInicio}
               onChange={(e) => onChange(index, e)}
             />
-          </div>
-          <div>
-            <label htmlFor="dataFim">Data final</label>
-            <input
+            <FormField
+              label="Data ou previsão de término"
+              formik={formik}
+              id="dataFim"
               type="text"
               name="dataFim"
-              placeholder="dataFim"
+              placeholder="00/00/0000"
               value={item.dataFim}
               onChange={(e) => onChange(index, e)}
             />
-          </div>
-          <div>
-            <button className="btn btn-warning" onClick={(e) => handleRemoveField(e, index)}>
-              X
-            </button>
-          </div>
-        </div>
-      ))}
 
-      <button onClick={handleAddLink}>Add a link</button>
-      <a onClick={() => console.log(escolaridade)}>logar</a>
+            <Button type="button" className="btn btn-warning" onClick={(e) => handleRemoveField(e, index)}>
+              X
+            </Button>
+          </FormRow>
+        </>
+      ))}
+      <Button
+        type="button"
+        onClick={handleAddLink}
+        background="#0174bd"
+        border="none"
+        padding="7px 12px"
+        color="white"
+        borderRadius="50px"
+      >
+        +
+      </Button>
     </>
   );
 };
