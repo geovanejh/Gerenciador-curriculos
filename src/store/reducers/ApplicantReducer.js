@@ -1,6 +1,7 @@
 const INITIAL_STATE = {
   applicant: {},
   applicants: [],
+  applyJobStatus: false,
   isLoading: true,
 };
 
@@ -12,11 +13,16 @@ const ApplicantReducer = (state = INITIAL_STATE, action) => {
         applicant: action.applicant,
         isLoading: action.isLoading,
       };
-    case 'LIST_APPLICANTS': 
+    case 'LIST_APPLICANTS':
       return {
         ...state,
-        applicant: null,
         applicants: action.applicants,
+        isLoading: action.isLoading,
+      };
+    case 'APPLY_JOB':
+      return {
+        ...state,
+        applyJobStatus: action.applyJobStatus,
         isLoading: action.isLoading,
       };
     default:

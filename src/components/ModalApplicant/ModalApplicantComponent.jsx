@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { connect } from "react-redux";
 import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 
+import { HandleAddAplicantToJob } from '../../store/actions/ApplicantAction';
 import { ButtonTag, Info, CardFechar } from './ModalApplicantComponent.style';
 
-const ModalApplicantComponent = ({ jobId, applicants }) => {
+const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [applyJobId, setApplyJobId] = useState(jobId);
 
@@ -23,11 +25,9 @@ const ModalApplicantComponent = ({ jobId, applicants }) => {
 
   const handleAddApplicant = (applicantId) => {
     debugger;
-    const teste = applyJobId;
     // TODO: Chamar action para vincular candidato em vaga
-    //TODO: chamar listagem de candidatos dentro do popup -> end point: /candidato/list-candidato
+    HandleAddAplicantToJob(dispatch, applyJobId, applicantId);
     handleToggleState();
-    toast.success('Candidato vinculado com sucesso!');
     return;
   };
 
@@ -76,4 +76,8 @@ const ModalApplicantComponent = ({ jobId, applicants }) => {
   );
 };
 
-export default ModalApplicantComponent;
+const mapStateToProps = (state) => ({
+  applyJobStatus: state.ApplicantReducer.applyJobStatus,
+});
+
+export default connect(mapStateToProps)(ModalApplicantComponent);
