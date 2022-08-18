@@ -4,7 +4,9 @@ import moment from "moment";
 
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
   try {
-    const { data } = await api.get(`/candidato/get-candidato/{idCandidato}?idCandidato=${idCanditado}`);
+    const { data } = await api.get(
+      `/candidato/get-candidato/{idCandidato}?idCandidato=${idCanditado}`
+    );
 
     const applicant = {
       type: "DETAIL_APPLICANT",

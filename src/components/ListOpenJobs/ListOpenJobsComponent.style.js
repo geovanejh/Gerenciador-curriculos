@@ -26,7 +26,13 @@ const PaginationContainer = styled(ReactPaginate)`
 `;
 
 const Msg = styled.h1`
-  color: grey;
+  /* color: grey; */
+  background-image: linear-gradient(90deg, #1a75c1 10%, #13b705 50%);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
 `;
 
 export { Container, PaginationContainer, Msg };

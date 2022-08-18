@@ -6,8 +6,8 @@ export const handleLogin = async (values, dispatch, navigate) => {
   setLoading(dispatch);
   try {
     const { data } = await api.post("/login/get-token/login", values);
-    console.log("a data:", data);
-    api.defaults.headers.common["Authorization"] = data.token;
+
+    api.defaults.headers.common["Authorization"] = data;
     localStorage.setItem("token", data.token);
 
     dispatch({
