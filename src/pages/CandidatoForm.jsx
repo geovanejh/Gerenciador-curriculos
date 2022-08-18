@@ -42,7 +42,13 @@ const CandidatoForm = () => {
 
       const formData = new FormData();
       const imagefile = values.personalFile;
-      formData.append("candidato", JSON.stringify(newObj));
+      formData.append(
+        "candidato",
+        new Blob([JSON.stringify(newObj)], {
+          type: "application/json",
+        })
+      );
+      // formData.append("candidato", JSON.stringify(newObj));
       formData.append("documento", imagefile);
 
       try {
