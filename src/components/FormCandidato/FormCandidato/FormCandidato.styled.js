@@ -13,15 +13,17 @@ export const SteppedForm = styled.div`
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  gap: 24px;
+  width: 900px;
   border: 1px solid rgb(26, 178, 78);
   border-top: none;
   border-radius: 0 0 6px 6px;
   padding: 24px;
 
-  > div {
-    display: flex;
-    flex-direction: column;
+  > button {
+    align-self: flex-start;
+    font-weight: 600;
+    font-size: 14px;
   }
 `;
 
