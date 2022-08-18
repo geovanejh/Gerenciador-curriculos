@@ -1,34 +1,39 @@
-import { connect } from "react-redux";
-import { useEffect } from "react";
+import { connect } from 'react-redux';
+import { useEffect } from 'react';
 
-import { HandleListJobs } from "../../store/actions/ListJobsAction";
-import JobCardComponent from "../JobCard/JobCardComponent";
+import { HandleListJobs } from '../../store/actions/ListJobsAction';
+import { HandleListApplicants } from '../../store/actions/ApplicantAction';
+import JobCardComponent from '../JobCard/JobCardComponent';
+import Loading from './../Loading/Loading';
 
 import {
   Container,
   PaginationContainer,
   Msg,
-} from "./ListOpenJobsComponent.style";
+} from './ListOpenJobsComponent.style';
 
-const ListOpenJobs = ({ jobs, dispatch }) => {
+const ListOpenJobs = ({ isLoading, jobs, applicants, dispatch }) => {
   const handleLoadPage = (page) => {
     HandleListJobs(dispatch, page.selected + 1);
   };
 
   const setup = async () => {
     HandleListJobs(dispatch);
+    HandleListApplicants(dispatch);
   };
 
   useEffect(() => {
     setup();
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Container>
       <Msg>Lista de vagas</Msg>
       {jobs &&
         jobs.jobs.map((job, index) => (
-          <JobCardComponent job={job} key={index} />
+          <JobCardComponent applicants={applicants} job={job} key={index} />
         ))}
       <div>
         <PaginationContainer
@@ -47,6 +52,8 @@ const ListOpenJobs = ({ jobs, dispatch }) => {
 
 const mapStateToProps = (state) => ({
   jobs: state.ListJobsReducer.jobs,
+  applicants: state.ApplicantReducer.applicants,
+  isLoading: state.ListJobsReducer.isLoading,
 });
 
 export default connect(mapStateToProps)(ListOpenJobs);
