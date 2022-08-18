@@ -8,7 +8,7 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
     const inputState = {
       instituicao: "",
       descricao: "",
-      cargo: "",
+      ExpCargo: "",
       dataInicio: "",
       dataFim: "",
     };
@@ -59,11 +59,11 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
             <FormField
               label="cargo"
               formik={formik}
-              id="cargo"
+              id="expCargo"
               type="text"
-              name="cargo"
+              name="expCargo"
               placeholder="Ex: Desenvolvedor Mobile Sênior"
-              value={item.cargo}
+              value={item.expCargo}
               onChange={(e) => onChange(index, e)}
             />
           </FormRow>
