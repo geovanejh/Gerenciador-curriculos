@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getApplicants, HandleListApplicants } from "../store/actions/ApplicantAction";
+import { HandleListApplicants } from "../store/actions/ApplicantAction";
 
 const Candidatos = ({ dispatch, applicants }) => {
   const navigate = useNavigate();
   console.log(applicants);
 
   const setup = () => {
-    getApplicants(dispatch);
+    HandleListApplicants(dispatch);
   };
 
   useEffect(() => {
@@ -25,7 +25,6 @@ const Candidatos = ({ dispatch, applicants }) => {
           <p>senioridade</p>
           <p>data de nascimento</p>
         </li>
-
         {applicants.map((e) => (
           <li>
             <p>{e.name}</p>
