@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import { useState } from "react";
-import api from "../api";
 import FormCandidato from "../components/FormCandidato/FormCandidato/FormCandidato";
 
 const CandidatoForm = () => {
@@ -14,10 +13,14 @@ const CandidatoForm = () => {
       dataFim: "",
     },
   ]);
-  const [experiencia, setExperiencia] = useState([]);
 
   const formik = useFormik({
-    initialValues: {},
+    initialValues: {
+      um: "",
+      dois: "",
+      tres: "",
+      quatro: "",
+    },
     onSubmit: (values) => {
       console.log("values: ", values);
       console.log("escolaridade: ", escolaridade);
@@ -70,8 +73,6 @@ const CandidatoForm = () => {
       formik={formik}
       escolaridade={escolaridade}
       setEscolaridade={setEscolaridade}
-      experiencia={experiencia}
-      setExperiencia={setExperiencia}
     ></FormCandidato>
   );
 };

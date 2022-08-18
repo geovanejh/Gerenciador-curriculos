@@ -32,9 +32,9 @@ const RegisterForm = ({ dispatch }) => {
       handleRegister(newObj, dispatch, navigate);
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Email inválido").required("- Obrigatório"),
+      email: Yup.string().email("Email inválido").required("OBRIGATÓRIO"),
       senha: Yup.string().min(8, "- Curto demais.").max(64, "- Grande demais").required("- Obrigatório"),
-      confirmaSenha: Yup.string().senhaIgual("As senhas digitadas são diferentes").required("- Obrigatório"),
+      confirmaSenha: Yup.string().senhaIgual("As senhas digitadas são diferentes"),
     }),
   });
 
