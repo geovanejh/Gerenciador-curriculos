@@ -1,5 +1,6 @@
 import api from "../../api";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
   try {
@@ -27,7 +28,7 @@ export const HandleListApplicants = async (dispatch) => {
         id: item.idCandidato,
         name: item.nome,
         role: item.cargo,
-        birthdate: item.dataNascimento,
+        birthdate: moment(item.dataNascimento).format("DD/MM/YYYY"),
         seniority: item.senioridade,
         resumeUrl: item.curriculoUrl,
       })),
@@ -36,17 +37,7 @@ export const HandleListApplicants = async (dispatch) => {
 
     dispatch(applicants);
   } catch (error) {
-    console.log(error);
     toast.error("Erro ao buscar cadanditado");
-  }
-};
-
-export const getApplicants = async (dispatch) => {
-  try {
-    const { data } = await api.get("/candidato/list-candidato");
-    console.log("data: ", data);
-  } catch (error) {
-    console.log("error:", error);
   }
 };
 
@@ -78,8 +69,8 @@ export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
 
 const mapFields = (data) => ({
   id: data.idCandidato,
-  name: data.nome,
-  cpf: data.cpf,
+  name: data.nome.toLowerCase(),
+  cpf: data.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4"),
   address: {
     neighborhood: data.endereco.bairro,
     city: data.endereco.cidade,

@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { HandleGetApplicantDetail } from '../../store/actions/ApplicantAction';
-import { connect } from 'react-redux';
-import { Card, Field, Group, Container } from './ApplicantDetails.styles';
+import { useEffect } from "react";
+import { HandleGetApplicantDetail } from "../../store/actions/ApplicantAction";
+import { connect } from "react-redux";
+import { Card, Field, Group, Container } from "./ApplicantDetails.styles";
 
 const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
   const setup = async () => {
@@ -29,7 +29,7 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
           </Group>
         </Card>
       )}
-      {/* <Card>
+      {/* <Card> 
         <Group>
           <Field>Nome: Fulaninho de tal</Field>
           <Field>CPF: Fulaninho de tal</Field>
