@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { HandleListApplicants } from "../store/actions/ApplicantAction";
+import { getApplicants, HandleListApplicants } from "../store/actions/ApplicantAction";
 
 const Candidatos = ({ dispatch, applicants }) => {
   const navigate = useNavigate();
   console.log(applicants);
 
   const setup = () => {
-    HandleListApplicants(dispatch);
+    getApplicants(dispatch);
   };
 
   useEffect(() => {

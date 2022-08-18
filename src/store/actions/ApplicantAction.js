@@ -1,30 +1,28 @@
-import api from '../../api';
-import { toast } from 'react-toastify';
+import api from "../../api";
+import { toast } from "react-toastify";
 
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
   try {
-    const { data } = await api.get(
-      `/candidato/get-candidato/{idCandidato}?idCandidato=${idCanditado}`
-    );
+    const { data } = await api.get(`/candidato/get-candidato/{idCandidato}?idCandidato=${idCanditado}`);
 
     const applicant = {
-      type: 'DETAIL_APPLICANT',
+      type: "DETAIL_APPLICANT",
       applicant: mapFields(data),
       isLoading: false,
     };
 
     dispatch(applicant);
   } catch (error) {
-    toast.error('Erro ao buscar cadanditado');
+    toast.error("Erro ao buscar cadanditado");
   }
 };
 
 export const HandleListApplicants = async (dispatch) => {
   try {
-    const { data } = await api.get('/candidato/list-candidato');
+    const { data } = await api.get("/candidato/list-candidato");
 
     const applicants = {
-      type: 'LIST_APPLICANTS',
+      type: "LIST_APPLICANTS",
       applicants: data.map((item) => ({
         id: item.idCandidato,
         name: item.nome,
@@ -38,19 +36,29 @@ export const HandleListApplicants = async (dispatch) => {
 
     dispatch(applicants);
   } catch (error) {
-    toast.error('Erro ao buscar cadanditado');
+    console.log(error);
+    toast.error("Erro ao buscar cadanditado");
+  }
+};
+
+export const getApplicants = async (dispatch) => {
+  try {
+    const { data } = await api.get("/candidato/list-candidato");
+    console.log("data: ", data);
+  } catch (error) {
+    console.log("error:", error);
   }
 };
 
 export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
   let applyJobStatus = {
-    type: 'APPLY_JOB',
+    type: "APPLY_JOB",
     applyJobStatus: true,
     isLoading: false,
   };
 
   try {
-    await api.post('/vaga', {
+    await api.post("/vaga", {
       idVaga: jobId,
       candidatos: [
         {
@@ -59,10 +67,10 @@ export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
       ],
     });
 
-    toast.success('Candidato vinculado com sucesso!');
+    toast.success("Candidato vinculado com sucesso!");
   } catch (error) {
     applyJobStatus.applyJobStatus = false;
-    toast.error('Erro ao candidatar para vaga');
+    toast.error("Erro ao candidatar para vaga");
   }
 
   dispatch(applyJobStatus);
