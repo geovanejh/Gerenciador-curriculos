@@ -87,11 +87,14 @@ const mapFields = (data) => ({
   },
 });
 
-export const handleEditApplicant = async (newObj, id, dispatch) => {
+export const handleEditApplicant = async (newObj, id, dispatch, navigate) => {
   setLoading(dispatch);
   try {
-    api.put("/candidato/update-candidato", { ...newObj, idCandidato: id });
+    await api.put("/candidato/update-candidato", { ...newObj, idCandidato: id });
+    toast.success("Candidato editado com sucesso!");
+    navigate(-1);
   } catch (error) {
+    toast.error("Um erro aconteceu!");
     console.log(error);
   }
   setLoading(dispatch);
@@ -100,7 +103,7 @@ export const handleEditApplicant = async (newObj, id, dispatch) => {
 export const handleCreateNewApplicant = async (formData, dispatch) => {
   setLoading(dispatch);
   try {
-    api.post("/candidato", formData, {
+    await api.post("/candidato", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -115,7 +118,7 @@ export const handleCreateNewApplicant = async (formData, dispatch) => {
 
 export const DeletaCandidatoById = async (idCandidato, dispatch) => {
   try {
-    const { data } = api.delete(`candidato/${idCandidato}`);
+    const { data } = await api.delete(`candidato/${idCandidato}`);
     console.log(data);
     HandleListApplicants(dispatch);
   } catch (error) {

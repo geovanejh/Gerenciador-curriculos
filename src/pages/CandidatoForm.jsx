@@ -2,19 +2,13 @@ import { useFormik } from "formik";
 import { useEffect } from "react";
 import { useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import api from "../api";
+import { useNavigate, useParams } from "react-router-dom";
 import FormCandidato from "../components/FormCandidato/FormCandidato/FormCandidato";
 import Loading from "../components/Loading/Loading";
-import {
-  FillApplicantFields,
-  handleCreateNewApplicant,
-  handleEditApplicant,
-  HandleGetApplicantDetail,
-} from "../store/actions/ApplicantAction";
-import { setLoading } from "../store/actions/UtilsAction";
+import { FillApplicantFields, handleCreateNewApplicant, handleEditApplicant } from "../store/actions/ApplicantAction";
 
 const CandidatoForm = ({ applicant, dispatch, loading }) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [step, setStep] = useState(1);
   const [escolaridade, setEscolaridade] = useState([
@@ -63,7 +57,7 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
       );
       formData.append("documento", imagefile);
 
-      id ? handleEditApplicant(newObj, id, dispatch) : handleCreateNewApplicant(formData, dispatch);
+      id ? handleEditApplicant(newObj, id, dispatch, navigate) : handleCreateNewApplicant(formData, dispatch, navigate);
     },
   });
 
