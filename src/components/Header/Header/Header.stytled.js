@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
   background: linear-gradient(90deg, rgba(26, 178, 78, 1) 0%, rgba(1, 115, 189, 1) 100%);
+  margin-bottom: 32px;
 
   > header {
     padding: 10px 0;
