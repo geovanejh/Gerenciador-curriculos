@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Logo from "./components/Header/Logo";
+import Header from "./components/Header/Header/Header";
 import Loading from "./components/Loading/Loading";
 import ApplicantDetails from "./pages/ApplicantDetails";
 import CandidatoForm from "./pages/CandidatoForm";
@@ -20,7 +20,7 @@ const Router = ({ dispatch, auth }) => {
     <Loading />
   ) : (
     <div>
-      {auth.isLogged === true && <Logo />}
+      {auth.isLogged === true && <Header />}
       <Routes>
         {auth.isLogged === true ? (
           <>
