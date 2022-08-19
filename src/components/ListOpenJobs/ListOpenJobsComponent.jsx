@@ -12,7 +12,7 @@ import {
   Msg,
 } from './ListOpenJobsComponent.style';
 
-const ListOpenJobs = ({ isLoading, jobs, applicants, dispatch }) => {
+const ListOpenJobs = ({ isLoading, jobs, dispatch }) => {
   const handleLoadPage = (page) => {
     HandleListJobs(dispatch, page.selected + 1);
   };

@@ -70,7 +70,7 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
                 </span>
                 <div>
                   <ButtonTag
-                    disabled={applicant.jobAppliant.includes(applyJobId)}
+                    hide={applicant.jobAppliant.includes(applyJobId)}
                     type="button"
                     onClick={() => handleAddApplicant(applicant.id)}
                   >
@@ -78,7 +78,7 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
                   </ButtonTag>
 
                   <ButtonTag
-                    disabled={!applicant.jobAppliant.includes(applyJobId)}
+                    hide={!applicant.jobAppliant.includes(applyJobId)}
                     type="button"
                     onClick={() => handleUnlinkApplicant(applicant.id)}
                   >

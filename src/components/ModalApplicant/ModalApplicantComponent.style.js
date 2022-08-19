@@ -47,9 +47,7 @@ const ButtonTag = styled.button`
     background: #16a23d;
   }
 
-  :nth-of-type(2) {
-    margin-left: 10px;
-  }
+  display: ${({ hide }) => hide ? 'none': 'flex'};
 
   :disabled {
     background-color: #8f9294;
