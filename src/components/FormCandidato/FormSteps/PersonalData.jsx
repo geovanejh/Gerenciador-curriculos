@@ -1,11 +1,10 @@
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
 import SelectField from "../../Forms/SelectField/SelectField";
-import { FormContent } from "../FormCandidato/FormCandidato.styled";
 
 const PersonalData = ({ formik }) => {
   return (
-    <FormContent>
+    <>
       <FormRow grid="1fr 1fr 0.5fr">
         <FormField
           label="Nome"
@@ -80,7 +79,7 @@ const PersonalData = ({ formik }) => {
           formik.setFieldValue("personalFile", event.currentTarget.files[0]);
         }}
       />
-    </FormContent>
+    </>
   );
 };
 export default PersonalData;

@@ -31,18 +31,9 @@ const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade, e
           <Button type="button" primary onClick={decrementaStep}>
             Voltar
           </Button>
-
-          {step < 4 ? (
-            <>
-              <Button type="Button" primary onClick={incrementaStep}>
-                Próximo
-              </Button>
-            </>
-          ) : (
-            <Button type="submit" primary>
-              Concluir
-            </Button>
-          )}
+          <Button type="button" primary onClick={incrementaStep}>
+            Próximo
+          </Button>
         </ButtonContainer>
       </FormContainer>
     </SteppedForm>

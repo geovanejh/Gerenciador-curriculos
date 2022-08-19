@@ -33,7 +33,7 @@ const ListOpenJobs = ({ isLoading, jobs, applicants, dispatch }) => {
       <Msg>Lista de vagas</Msg>
       {jobs &&
         jobs.jobs.map((job, index) => (
-          <JobCardComponent applicants={applicants} job={job} key={index} />
+          <JobCardComponent job={job} key={index} />
         ))}
       <div>
         <PaginationContainer

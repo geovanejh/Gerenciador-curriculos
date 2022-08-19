@@ -34,6 +34,7 @@ export const HandleListApplicants = async (dispatch) => {
         birthdate: moment(item.dataNascimento).format("DD/MM/YYYY"),
         seniority: item.senioridade,
         resumeUrl: item.curriculoUrl,
+        jobAppliant: item.vagas.map(item => item.idVaga)
       })),
       isLoading: false,
     };
@@ -66,6 +67,25 @@ export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
   } catch (error) {
     applyJobStatus.applyJobStatus = false;
     toast.error("Erro ao candidatar para vaga");
+  }
+
+  dispatch(applyJobStatus);
+};
+
+export const HandleUnlinkAplicantToJob = async (dispatch, jobId, applicantId) => {
+  let applyJobStatus = {
+    type: "UNLINK_JOB",
+    unlinkJobStatus: true,
+    isLoading: false,
+  };
+
+  try {
+    await api.post(`/vaga/desvincular/vaga/${jobId}/candidato/${applicantId}`);
+
+    toast.success("Candidato desvinculado com sucesso!");
+  } catch (error) {
+    applyJobStatus.unlinkJobStatus = false;
+    toast.error("Erro ao desvincular condidato da vaga");
   }
 
   dispatch(applyJobStatus);

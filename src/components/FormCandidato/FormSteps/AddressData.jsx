@@ -1,10 +1,9 @@
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
-import { FormContent } from "../FormCandidato/FormCandidato.styled";
 
 const AddressData = ({ formik }) => {
   return (
-    <FormContent>
+    <>
       <FormRow grid="0.5fr 1fr 0.2fr">
         <FormField
           label="CEP"
@@ -70,7 +69,7 @@ const AddressData = ({ formik }) => {
           formik={formik}
         />
       </FormRow>
-    </FormContent>
+    </>
   );
 };
 export default AddressData;

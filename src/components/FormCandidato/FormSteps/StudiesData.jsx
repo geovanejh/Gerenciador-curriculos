@@ -2,7 +2,6 @@ import { Button } from "../../Button/Button.styled";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
 import SelectField from "../../Forms/SelectField/SelectField";
-import { DinamicFormContent, FormContent, RemoveButton, Teste } from "../FormCandidato/FormCandidato.styled";
 
 const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
   const handleAddLink = (e) => {
@@ -43,9 +42,9 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
   };
 
   return (
-    <DinamicFormContent>
+    <>
       {escolaridade.map((item, index) => (
-        <div>
+        <>
           <FormRow grid="0.5fr 1fr">
             <SelectField
               options={[
@@ -70,7 +69,7 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
               onChange={(e) => onChange(index, e)}
             />
           </FormRow>
-          <FormRow grid="1fr 150px 150px 30px">
+          <FormRow grid="1fr 0.3fr 0.5fr 0.1fr">
             <FormField
               label="instituicao"
               formik={formik}
@@ -93,7 +92,7 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
               onChange={(e) => onChange(index, e)}
             />
             <FormField
-              label="Data final"
+              label="Data ou previsão de término"
               formik={formik}
               id="dataFim"
               type="text"
@@ -102,24 +101,25 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
               value={item.dataFim}
               onChange={(e) => onChange(index, e)}
             />
-            <RemoveButton type="button" onClick={(e) => handleRemoveField(e, index)}>
+
+            <Button type="button" className="btn btn-warning" onClick={(e) => handleRemoveField(e, index)}>
               X
-            </RemoveButton>
+            </Button>
           </FormRow>
-        </div>
+        </>
       ))}
       <Button
         type="button"
         onClick={handleAddLink}
         background="#0174bd"
         border="none"
-        padding="2px 6px"
+        padding="7px 12px"
         color="white"
-        borderRadius="5px"
+        borderRadius="50px"
       >
-        + Adicionar
+        +
       </Button>
-    </DinamicFormContent>
+    </>
   );
 };
 export default StudiesData;

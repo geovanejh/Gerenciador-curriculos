@@ -1,11 +1,6 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../components/Button/Button.styled";
-import { CandidatosContainer } from "../components/CandidatosContainer/CandidatosContainer.styled";
-import CandidatosList from "../components/CandidatosList/CandidatosList";
-import { PageContainerTitle } from "../components/PageStyles/PageContainerTitle";
-import { PageContainerWithBorder } from "../components/PageStyles/PageContainerWithBorder";
 import { DeletaCandidatoById, HandleListApplicants } from "../store/actions/ApplicantAction";
 
 const Candidatos = ({ dispatch, applicants }) => {
@@ -25,15 +20,27 @@ const Candidatos = ({ dispatch, applicants }) => {
   }, []);
 
   return (
-    <CandidatosContainer>
-      <PageContainerTitle>Candidatos cadastrados no sistema</PageContainerTitle>
-      <PageContainerWithBorder>
-        <Button primary onClick={() => navigate("/candidatos/form")}>
-          Adicionar
-        </Button>
-        <CandidatosList applicants={applicants} handleDeleteCandidato={handleDeleteCandidato} />
-      </PageContainerWithBorder>
-    </CandidatosContainer>
+    <div>
+      <button onClick={() => navigate("/candidatos/form")}>Adicionar</button>
+      <ul>
+        <li>
+          <p>nome</p>
+          <p>cargo</p>
+          <p>senioridade</p>
+          <p>data de nascimento</p>
+        </li>
+        {applicants.map((e) => (
+          <li>
+            <p>{e.name}</p>
+            <p>{e.role}</p>
+            <p>{e.seniority}</p>
+            <p>{e.birthdate}</p>
+            <button onClick={() => navigate(`/candidatos/form/${e.id}`)}> editar </button>
+            <button onClick={() => handleDeleteCandidato(e.id)}> excluir </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

@@ -47,6 +47,15 @@ const ButtonTag = styled.button`
     background: #16a23d;
   }
 
+  :nth-of-type(2) {
+    margin-left: 10px;
+  }
+
+  :disabled {
+    background-color: #8f9294;
+    cursor: not-allowed;
+  }
+
   @media (max-width: 992px) {
     margin: 14px 0 0 0;
   }

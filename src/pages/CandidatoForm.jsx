@@ -42,7 +42,6 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
           logradouro: values.rua,
           bairro: values.bairro,
           cidade: values.cidade,
-          estado: values.estado,
         },
         escolaridades: escolaridade,
         experiencias: experiencia,
