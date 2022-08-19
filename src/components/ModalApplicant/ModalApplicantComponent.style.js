@@ -47,6 +47,13 @@ const ButtonTag = styled.button`
     background: #16a23d;
   }
 
+  display: ${({ hide }) => (hide ? "none" : "flex")};
+
+  :disabled {
+    background-color: #8f9294;
+    cursor: not-allowed;
+  }
+
   @media (max-width: 992px) {
     margin: 14px 0 0 0;
   }
@@ -60,13 +67,16 @@ const ButtonTag = styled.button`
 `;
 
 const CardFechar = styled.div`
+  width: auto;
   display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 15px;
+
   position: sticky;
   z-index: 999;
   top: -15px;
+  align-items: center;
+  border-bottom: 1px solid green;
 `;
 
 export { ButtonTag, Info, CardFechar };

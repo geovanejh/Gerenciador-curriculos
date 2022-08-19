@@ -6,6 +6,7 @@ import { setLoading } from "./UtilsAction";
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
   try {
     const { data } = await api.get(`/candidato/get-candidato/${idCanditado}`);
+    console.log(data);
 
     const applicant = {
       type: "DETAIL_APPLICANT",
@@ -33,6 +34,7 @@ export const HandleListApplicants = async (dispatch) => {
         birthdate: moment(item.dataNascimento).format("DD/MM/YYYY"),
         seniority: item.senioridade,
         resumeUrl: item.curriculoUrl,
+        jobAppliant: item.vagas.map(item => item.idVaga)
       })),
       isLoading: false,
     };
@@ -70,6 +72,25 @@ export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
   dispatch(applyJobStatus);
 };
 
+export const HandleUnlinkAplicantToJob = async (dispatch, jobId, applicantId) => {
+  let applyJobStatus = {
+    type: "UNLINK_JOB",
+    unlinkJobStatus: true,
+    isLoading: false,
+  };
+
+  try {
+    await api.post(`/vaga/desvincular/vaga/${jobId}/candidato/${applicantId}`);
+
+    toast.success("Candidato desvinculado com sucesso!");
+  } catch (error) {
+    applyJobStatus.unlinkJobStatus = false;
+    toast.error("Erro ao desvincular condidato da vaga");
+  }
+
+  dispatch(applyJobStatus);
+};
+
 const mapFields = (data) => ({
   id: data.idCandidato,
   name: data.nome.toLowerCase(),
@@ -85,7 +106,7 @@ const mapFields = (data) => ({
     neighborhood: data.endereco.bairro,
     city: data.endereco.cidade,
   },
-  scholarity: data.escolaridade.map((item) => ({
+  scholarity: data?.escolaridade.map((item) => ({
     id: item?.idEscolaridade,
     institution: item?.instituicao,
     descricao: item?.descricao,
