@@ -40,9 +40,10 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
 
       <Modal isOpen={isOpen} style={customStyles} ariaHideApp={false}>
         <CardFechar>
+          <h2>Candidatos</h2>
           <ButtonTag onClick={handleToggleState}>Fechar</ButtonTag>
         </CardFechar>
-        <h2>Candidatos</h2>
+
         {applicants &&
           applicants.map((applicant, index) => {
             return (

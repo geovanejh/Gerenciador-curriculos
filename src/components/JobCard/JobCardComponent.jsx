@@ -14,7 +14,7 @@ const JobCardComponent = ({ job, applicants }) => {
       <ModalApplicantComponent applicants={applicants} jobId={job.id} />
     </Card>
   ) : (
-    "Nao há vagas cadastradas"
+    <h1>"Nao há vagas cadastradas"</h1>
   );
 };
 

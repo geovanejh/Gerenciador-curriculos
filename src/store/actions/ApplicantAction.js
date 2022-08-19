@@ -6,6 +6,7 @@ import { setLoading } from "./UtilsAction";
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
   try {
     const { data } = await api.get(`/candidato/get-candidato/${idCanditado}`);
+    console.log(data);
 
     const applicant = {
       type: "DETAIL_APPLICANT",
@@ -85,7 +86,7 @@ const mapFields = (data) => ({
     neighborhood: data.endereco.bairro,
     city: data.endereco.cidade,
   },
-  scholarity: data.escolaridade.map((item) => ({
+  scholarity: data?.escolaridade.map((item) => ({
     id: item?.idEscolaridade,
     institution: item?.instituicao,
     descricao: item?.descricao,

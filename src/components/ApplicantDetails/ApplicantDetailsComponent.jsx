@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { HandleGetApplicantDetail } from "../../store/actions/ApplicantAction";
-import { connect } from "react-redux";
-import { Card, Field, Group, Container } from "./ApplicantDetails.styles";
+import { useEffect } from 'react';
+import { HandleGetApplicantDetail } from '../../store/actions/ApplicantAction';
+import { connect } from 'react-redux';
+import { Card, Field, Group, Container } from './ApplicantDetails.styles';
 
 const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
   const setup = async () => {
@@ -26,7 +26,7 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
             <Field>Senioridade: {applicant.seniority}</Field>
             <Field>Cargo: {applicant.role}</Field>
             <Field>
-              Curriculo: <a href={applicant.resumeUrl}>Download</a>{" "}
+              Curriculo: <a href={applicant.resumeUrl}>Download</a>{' '}
             </Field>
             <Field>Endereço:</Field>
             <Field>Número: {applicant.address?.number}</Field>
@@ -34,47 +34,34 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
             <Field>Bairro: {applicant.address?.neighborhood}</Field>
             <Field>Cidade: {applicant.address?.city}</Field>
             <Field>Escolaridade:</Field>
-            <Field>Instituição: {applicant.scholarity?.institution}</Field>
-            <Field>Descrição: {applicant.scholarity?.drescription}</Field>
-            <Field>Data de início: {applicant.scholarity?.startDate}</Field>
-            <Field>Data de fim: {applicant.scholarity?.endDate}</Field>
+            {applicant?.scholarity &&
+              applicant?.scholarity.map((item) => {
+                return (
+                  <>
+                    <Field>Instituição: {item.institution}</Field>
+                    <Field>Descrição: {item.drescription}</Field>
+                    <Field>Data de início: {item.startDate}</Field>
+                    <Field>Data de fim: {item.endDate}</Field>
+                  </>
+                );
+              })}
+
             <Field>Experiência:</Field>
-            <Field>Instituição: {applicant.experience?.institute}</Field>
-            <Field>Descrição: {applicant.experience?.drescription}</Field>
-            <Field>Cargo: {applicant.experience?.role}</Field>
-            <Field>Data de início: {applicant.experience?.startDate}</Field>
-            <Field>Data de fim: {applicant.experience?.endDate}</Field>
+            {applicant?.experience &&
+              applicant.experience.map((item) => {
+                return (
+                  <>
+                    <Field>Instituição: {item.company}</Field>
+                    <Field>Descrição: {item.description}</Field>
+                    <Field>Cargo: {item.role}</Field>
+                    <Field>Data de início: {item.startDate}</Field>
+                    <Field>Data de fim: {item.endDate}</Field>
+                  </>
+                );
+              })}
           </Group>
         </Card>
       )}
-      {/* <Card> 
-        <Group>
-          <Field>Nome: Fulaninho de tal</Field>
-          <Field>CPF: Fulaninho de tal</Field>
-          <Field>Data nascimento: Fulaninho de tal </Field>
-          <Field>Endereço: Fulaninho de tal </Field>
-        </Group>
-
-        <Group>
-          <Field>Dados Escolares </Field>
-        </Group>
-
-        <Group>
-          <Field>Experiências</Field>
-        </Group>
-
-        <Group>
-          <Field>Link para download do currículo em arquivo</Field>
-        </Group>
-
-        <Group>
-          <Field>Senioridade</Field>
-        </Group>
-
-        <Group>
-          <Field>Cargo</Field>
-        </Group>
-      </Card> */}
     </Container>
   );
 };
