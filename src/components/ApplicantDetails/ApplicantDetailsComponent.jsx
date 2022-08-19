@@ -38,10 +38,10 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
           </Group>
           Escolaridade:
           <Group>
-            <Field>Instituição: {applicant.education?.institute}</Field>
-            <Field>Descrição: {applicant.education?.drescription}</Field>
-            <Field>Data de início: {applicant.education?.startDate}</Field>
-            <Field>Data de fim: {applicant.education?.endDate}</Field>
+            <Field>Instituição: {applicant.scholarity?.institution}</Field>
+            <Field>Descrição: {applicant.scholarity?.drescription}</Field>
+            <Field>Data de início: {applicant.scholarity?.startDate}</Field>
+            <Field>Data de fim: {applicant.scholarity?.endDate}</Field>
           </Group>
           Experiência:
           <Group>

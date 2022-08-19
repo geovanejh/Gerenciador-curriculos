@@ -86,4 +86,8 @@ const mapFields = (data) => ({
     neighborhood: data.endereco.bairro,
     city: data.endereco.cidade,
   },
+  // scholarity: data.escolaridade.map((item) => ({
+  //   id: item?.idEscolaridade,
+  //   institution: item?.instituicao,
+  // })),
 });
