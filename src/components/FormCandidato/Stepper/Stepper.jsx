@@ -1,6 +1,6 @@
 import { StepperContainer } from "./Stepper.styled";
 
-const Stepper = ({ step, setStep }) => {
+const Stepper = ({ setStep }) => {
   return (
     <StepperContainer>
       <div onClick={() => setStep(1)}>
