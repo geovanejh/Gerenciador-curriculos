@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Info = styled.div`
   display: flex;
@@ -38,16 +38,18 @@ const ButtonTag = styled.button`
   font-weight: 600;
   font-size: 12px;
   color: #fff;
-  background: #1ab24e;
+  background: ${({ typeAction }) =>
+    typeAction === 'bind' ? '#1ab24e' : '#de1d1d'};
   border-radius: 8px;
   padding: 4px;
   border: none;
   cursor: pointer;
   :hover {
-    background: #16a23d;
+    background: ${({ typeAction }) =>
+      typeAction === 'bind' ? '#16a23d' : 'red'};
   }
 
-  display: ${({ hide }) => (hide ? "none" : "flex")};
+  display: ${({ hide }) => (hide ? 'none' : 'flex')};
 
   :disabled {
     background-color: #8f9294;

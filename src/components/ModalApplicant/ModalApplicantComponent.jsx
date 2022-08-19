@@ -40,14 +40,16 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
 
   return (
     <div>
-      <ButtonTag type="button" onClick={handleToggleState}>
+      <ButtonTag typeAction={'bind'} type="button" onClick={handleToggleState}>
         Vincular Candidato
       </ButtonTag>
 
       <Modal isOpen={isOpen} style={customStyles} ariaHideApp={false}>
         <CardFechar>
           <h2>Candidatos</h2>
-          <ButtonTag onClick={handleToggleState}>Fechar</ButtonTag>
+          <ButtonTag typeAction={'bind'} onClick={handleToggleState}>
+            Fechar
+          </ButtonTag>
         </CardFechar>
 
         {applicants &&
@@ -70,6 +72,7 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
                 </span>
                 <div>
                   <ButtonTag
+                    typeAction={'bind'}
                     hide={applicant.jobAppliant.includes(applyJobId)}
                     type="button"
                     onClick={() => handleAddApplicant(applicant.id)}
@@ -78,6 +81,7 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
                   </ButtonTag>
 
                   <ButtonTag
+                    typeAction={'unbind'}
                     hide={!applicant.jobAppliant.includes(applyJobId)}
                     type="button"
                     onClick={() => handleUnlinkApplicant(applicant.id)}

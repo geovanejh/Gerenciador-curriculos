@@ -30,7 +30,7 @@ export const HandleListJobs = async (
 const mapFields = (data) => ({
   id: data.id,
   title: data.Titulo,
-  region: `${data.Estado} - ${data.Cidade}`,
+  region: !data.Estado || !data.Cidade ? 'Remoto' : `${data.Estado} - ${data.Cidade}`,
   contractType: data.TipoContratacao,
   category: data.Categoria,
   tags: data.Tags,
