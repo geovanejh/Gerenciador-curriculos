@@ -28,23 +28,17 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
             <Field>
               Curriculo: <a href={applicant.resumeUrl}>Download</a>{" "}
             </Field>
-          </Group>
-          <Group>
-            Endereço
+            <Field>Endereço:</Field>
             <Field>Número: {applicant.address?.number}</Field>
             <Field>Rua: {applicant.address?.street}</Field>
             <Field>Bairro: {applicant.address?.neighborhood}</Field>
             <Field>Cidade: {applicant.address?.city}</Field>
-          </Group>
-          Escolaridade:
-          <Group>
+            <Field>Escolaridade:</Field>
             <Field>Instituição: {applicant.scholarity?.institution}</Field>
             <Field>Descrição: {applicant.scholarity?.drescription}</Field>
             <Field>Data de início: {applicant.scholarity?.startDate}</Field>
             <Field>Data de fim: {applicant.scholarity?.endDate}</Field>
-          </Group>
-          Experiência:
-          <Group>
+            <Field>Experiência:</Field>
             <Field>Instituição: {applicant.experience?.institute}</Field>
             <Field>Descrição: {applicant.experience?.drescription}</Field>
             <Field>Cargo: {applicant.experience?.role}</Field>

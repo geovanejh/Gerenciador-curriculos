@@ -85,16 +85,30 @@ const mapFields = (data) => ({
     neighborhood: data.endereco.bairro,
     city: data.endereco.cidade,
   },
-  // scholarity: data.escolaridade.map((item) => ({
-  //   id: item?.idEscolaridade,
-  //   institution: item?.instituicao,
-  // })),
+  scholarity: data.escolaridade.map((item) => ({
+    id: item?.idEscolaridade,
+    institution: item?.instituicao,
+    descricao: item?.descricao,
+    startDate: item?.dataInicio,
+    endDate: item?.dataFim,
+  })),
+  experience: data.experiencia.map((item) => ({
+    id: item?.idExperiencia,
+    company: item?.instituicao,
+    description: item?.descricao,
+    role: item?.cargo,
+    startDate: item?.dataInicio,
+    endDate: item?.dataFim,
+  })),
 });
 
 export const handleEditApplicant = async (newObj, id, dispatch, navigate) => {
   setLoading(dispatch);
   try {
-    await api.put("/candidato/update-candidato", { ...newObj, idCandidato: id });
+    await api.put("/candidato/update-candidato", {
+      ...newObj,
+      idCandidato: id,
+    });
     toast.success("Candidato editado com sucesso!");
     navigate(-1);
   } catch (error) {
@@ -130,7 +144,13 @@ export const DeletaCandidatoById = async (idCandidato, dispatch) => {
   }
 };
 
-export const FillApplicantFields = async (idCandidato, formik, setExperiencia, setEscolaridade, dispatch) => {
+export const FillApplicantFields = async (
+  idCandidato,
+  formik,
+  setExperiencia,
+  setEscolaridade,
+  dispatch
+) => {
   setLoading(dispatch);
   try {
     const { data } = await api.get(`/candidato/get-candidato/${idCandidato}`);
