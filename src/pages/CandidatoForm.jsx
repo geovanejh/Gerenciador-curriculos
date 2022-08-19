@@ -1,9 +1,21 @@
 import { useFormik } from "formik";
+import { useEffect } from "react";
 import { useState } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import api from "../api";
 import FormCandidato from "../components/FormCandidato/FormCandidato/FormCandidato";
+import Loading from "../components/Loading/Loading";
+import {
+  FillApplicantFields,
+  handleCreateNewApplicant,
+  handleEditApplicant,
+  HandleGetApplicantDetail,
+} from "../store/actions/ApplicantAction";
+import { setLoading } from "../store/actions/UtilsAction";
 
-const CandidatoForm = () => {
+const CandidatoForm = ({ applicant, dispatch, loading }) => {
+  const { id } = useParams();
   const [step, setStep] = useState(1);
   const [escolaridade, setEscolaridade] = useState([
     {
@@ -31,6 +43,7 @@ const CandidatoForm = () => {
         senioridade: values.senioridade,
         cargo: values.cargo,
         endereco: {
+          cep: values.cep,
           numero: values.numero,
           logradouro: values.rua,
           bairro: values.bairro,
@@ -48,22 +61,25 @@ const CandidatoForm = () => {
           type: "application/json",
         })
       );
-      // formData.append("candidato", JSON.stringify(newObj));
       formData.append("documento", imagefile);
 
-      try {
-        api.post("/candidato", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
+      id ? handleEditApplicant(newObj, id, dispatch) : handleCreateNewApplicant(formData, dispatch);
     },
   });
 
-  return (
+  const setup = async () => {
+    FillApplicantFields(id, formik, setExperiencia, setEscolaridade, dispatch);
+  };
+
+  useEffect(() => {
+    if (id) {
+      setup(id);
+    }
+  }, []);
+
+  return loading ? (
+    <Loading />
+  ) : (
     <FormCandidato
       step={step}
       setStep={setStep}
@@ -75,4 +91,10 @@ const CandidatoForm = () => {
     ></FormCandidato>
   );
 };
-export default CandidatoForm;
+
+const mapStateToProps = (state) => ({
+  applicant: state.ApplicantReducer.applicant,
+  loading: state.UtilsReducer.loading,
+});
+
+export default connect(mapStateToProps)(CandidatoForm);
