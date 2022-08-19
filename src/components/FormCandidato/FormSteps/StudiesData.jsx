@@ -113,9 +113,9 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
         onClick={handleAddLink}
         background="#0174bd"
         border="none"
-        padding="7px 12px"
+        padding="2px 6px"
         color="white"
-        borderRadius="50px"
+        borderRadius="5px"
       >
         + Adicionar
       </Button>
