@@ -3,12 +3,13 @@ import styled from "styled-components";
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-
+  box-shadow: 4px 6px 10px 0px black;
   border-radius: 10px;
   background: #f4f2f2;
   margin: 10px 0;
   padding: 13px;
   width: 32em;
+  background-image: url("./img/patternECOStransparente.png");
 
   @media (max-width: 768px) {
     margin: 2px 0;

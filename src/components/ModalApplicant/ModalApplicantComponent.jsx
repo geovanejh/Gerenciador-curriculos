@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { connect } from "react-redux";
 import Modal from "react-modal";
-import { Moment } from "moment";
 
 import { HandleAddAplicantToJob } from "../../store/actions/ApplicantAction";
 import { ButtonTag, Info, CardFechar } from "./ModalApplicantComponent.style";

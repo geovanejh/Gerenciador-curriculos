@@ -5,7 +5,7 @@ const Info = styled.div`
   justify-content: space-between;
   margin: 20px 0;
   padding: 15px;
-
+  box-shadow: 2px 6px 5px 0px black;
   border-radius: 5px;
   border: 1px solid green;
   cursor: pointer;
@@ -16,7 +16,9 @@ const Info = styled.div`
   }
   :hover {
     background-color: #00800044;
+    transform: scale(1.03);
   }
+
   @media (max-width: 992px) {
     flex-direction: column;
     padding: 14px;
@@ -63,6 +65,7 @@ const CardFechar = styled.div`
   flex-direction: column;
   align-items: flex-end;
   position: sticky;
+  z-index: 999;
   top: -15px;
 `;
 
