@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { CandidatosContainer } from "../components/CandidatosContainer/CandidatosContainer.styled";
 import { DeletaCandidatoById, HandleListApplicants } from "../store/actions/ApplicantAction";
 
 const Candidatos = ({ dispatch, applicants }) => {
@@ -20,7 +21,7 @@ const Candidatos = ({ dispatch, applicants }) => {
   }, []);
 
   return (
-    <div>
+    <CandidatosContainer>
       <button onClick={() => navigate("/candidatos/form")}>Adicionar</button>
       <ul>
         <li>
@@ -40,7 +41,7 @@ const Candidatos = ({ dispatch, applicants }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </CandidatosContainer>
   );
 };
 

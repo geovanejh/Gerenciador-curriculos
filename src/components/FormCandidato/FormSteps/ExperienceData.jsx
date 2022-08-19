@@ -2,6 +2,7 @@ import { Button } from "../../Button/Button.styled";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
 import SelectField from "../../Forms/SelectField/SelectField";
+import { DinamicFormContent, FormContent, RemoveButton } from "../FormCandidato/FormCandidato.styled";
 
 const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
   const handleAddLink = (e) => {
@@ -42,10 +43,10 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
   };
 
   return (
-    <>
+    <DinamicFormContent>
       {experiencia.map((item, index) => (
-        <>
-          <FormRow grid="1fr 1fr">
+        <div>
+          <FormRow grid="1fr 1fr 150px 150px">
             <FormField
               label="instituicao"
               formik={formik}
@@ -67,18 +68,6 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
               value={item.cargo}
               onChange={(e) => onChange(index, e)}
             />
-          </FormRow>
-          <FormField
-            label="descrição"
-            formik={formik}
-            id="descricao"
-            type="text"
-            name="descricao"
-            placeholder="00/00/0000"
-            value={item.descricao}
-            onChange={(e) => onChange(index, e)}
-          />
-          <FormRow grid="1fr 1fr 1fr">
             <FormField
               label="Data de Início"
               formik={formik}
@@ -90,7 +79,7 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
               onChange={(e) => onChange(index, e)}
             />
             <FormField
-              label="Data ou previsão de término"
+              label="Data final"
               formik={formik}
               id="dataFim"
               type="text"
@@ -99,11 +88,23 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
               value={item.dataFim}
               onChange={(e) => onChange(index, e)}
             />
-            <Button type="button" className="btn btn-warning" onClick={(e) => handleRemoveField(e, index)}>
-              X
-            </Button>
           </FormRow>
-        </>
+          <FormRow grid="1fr 30px">
+            <FormField
+              label="descrição"
+              formik={formik}
+              id="descricao"
+              type="text"
+              name="descricao"
+              placeholder="00/00/0000"
+              value={item.descricao}
+              onChange={(e) => onChange(index, e)}
+            />
+            <RemoveButton type="button" className="btn btn-warning" onClick={(e) => handleRemoveField(e, index)}>
+              X
+            </RemoveButton>
+          </FormRow>
+        </div>
       ))}
       <Button
         type="button"
@@ -114,10 +115,9 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
         color="white"
         borderRadius="50px"
       >
-        +
+        + Adicionar
       </Button>
-      <button type="submit">submitar</button>
-    </>
+    </DinamicFormContent>
   );
 };
 export default ExperienceData;
