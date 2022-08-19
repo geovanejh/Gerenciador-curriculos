@@ -7,19 +7,19 @@ const INITIAL_STATE = {
 
 const ApplicantReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case 'DETAIL_APPLICANT':
+    case "DETAIL_APPLICANT":
       return {
         ...state,
         applicant: action.applicant,
         isLoading: action.isLoading,
       };
-    case 'LIST_APPLICANTS':
+    case "LIST_APPLICANTS":
       return {
         ...state,
         applicants: action.applicants,
         isLoading: action.isLoading,
       };
-    case 'APPLY_JOB':
+    case "APPLY_JOB":
       return {
         ...state,
         applyJobStatus: action.applyJobStatus,

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { HandleListApplicants } from "../store/actions/ApplicantAction";
+import { DeletaCandidatoById, HandleListApplicants } from "../store/actions/ApplicantAction";
 
 const Candidatos = ({ dispatch, applicants }) => {
   const navigate = useNavigate();
@@ -11,13 +11,17 @@ const Candidatos = ({ dispatch, applicants }) => {
     HandleListApplicants(dispatch);
   };
 
+  const handleDeleteCandidato = (idCandidato) => {
+    DeletaCandidatoById(idCandidato, dispatch);
+  };
+
   useEffect(() => {
     setup();
   }, []);
 
   return (
     <div>
-      <button onClick={() => navigate("/candidatos/novo")}>Adicionar</button>
+      <button onClick={() => navigate("/candidatos/form")}>Adicionar</button>
       <ul>
         <li>
           <p>nome</p>
@@ -31,6 +35,8 @@ const Candidatos = ({ dispatch, applicants }) => {
             <p>{e.role}</p>
             <p>{e.seniority}</p>
             <p>{e.birthdate}</p>
+            <button onClick={() => navigate(`/candidatos/form/${e.id}`)}> editar </button>
+            <button onClick={() => handleDeleteCandidato(e.id)}> excluir </button>
           </li>
         ))}
       </ul>

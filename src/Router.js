@@ -27,7 +27,8 @@ const Router = ({ dispatch, auth }) => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/candidato/:id" element={<ApplicantDetails />} />
             <Route path="/candidatos/" element={<Candidatos />} />
-            <Route path="/candidatos/novo" element={<CandidatoForm />} />
+            <Route path="/candidatos/form" element={<CandidatoForm />} />
+            <Route path="/candidatos/form/:id" element={<CandidatoForm />} />
           </>
         ) : (
           <>
