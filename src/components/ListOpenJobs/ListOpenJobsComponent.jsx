@@ -12,7 +12,7 @@ import {
   Msg,
 } from './ListOpenJobsComponent.style';
 
-const ListOpenJobs = ({ isLoading, jobs, dispatch }) => {
+const ListOpenJobs = ({ isLoading, jobs, applicants, dispatch }) => {
   const handleLoadPage = (page) => {
     HandleListJobs(dispatch, page.selected + 1);
   };
@@ -33,7 +33,7 @@ const ListOpenJobs = ({ isLoading, jobs, dispatch }) => {
       <Msg>Lista de vagas</Msg>
       {jobs &&
         jobs.jobs.map((job, index) => (
-          <JobCardComponent job={job} key={index} />
+          <JobCardComponent applicants={applicants} job={job} key={index} />
         ))}
       <div>
         <PaginationContainer

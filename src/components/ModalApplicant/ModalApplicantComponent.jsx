@@ -1,13 +1,9 @@
-import { useState } from 'react';
-import { connect } from 'react-redux';
-import Modal from 'react-modal';
+import { useState } from "react";
+import { connect } from "react-redux";
+import Modal from "react-modal";
 
-import {
-  HandleAddAplicantToJob,
-  HandleUnlinkAplicantToJob,
-  HandleListApplicants,
-} from '../../store/actions/ApplicantAction';
-import { ButtonTag, Info, CardFechar } from './ModalApplicantComponent.style';
+import { HandleAddAplicantToJob } from "../../store/actions/ApplicantAction";
+import { ButtonTag, Info, CardFechar } from "./ModalApplicantComponent.style";
 
 const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,25 +11,23 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
 
   const customStyles = {
     content: {
-      width: '50%',
-      height: '60%',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
+      width: "50%",
+      height: "60%",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
     },
   };
 
-  const handleAddApplicant = async (applicantId) => {
-    await HandleAddAplicantToJob(dispatch, applyJobId, applicantId);
-    HandleListApplicants(dispatch);
-  };
-
-  const handleUnlinkApplicant = async (applicantId) => {
-    await HandleUnlinkAplicantToJob(dispatch, jobId, applicantId);
-    HandleListApplicants(dispatch);
+  const handleAddApplicant = (applicantId) => {
+    debugger;
+    // TODO: Chamar action para vincular candidato em vaga
+    HandleAddAplicantToJob(dispatch, applyJobId, applicantId);
+    handleToggleState();
+    return;
   };
 
   const handleToggleState = () => setIsOpen(!isOpen);
@@ -46,10 +40,9 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
 
       <Modal isOpen={isOpen} style={customStyles} ariaHideApp={false}>
         <CardFechar>
-          <h2>Candidatos</h2>
           <ButtonTag onClick={handleToggleState}>Fechar</ButtonTag>
         </CardFechar>
-
+        <h2>Candidatos</h2>
         {applicants &&
           applicants.map((applicant, index) => {
             return (
@@ -68,23 +61,12 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
                     download
                   </a>
                 </span>
-                <div>
-                  <ButtonTag
-                    hide={applicant.jobAppliant.includes(applyJobId)}
-                    type="button"
-                    onClick={() => handleAddApplicant(applicant.id)}
-                  >
-                    Vincular
-                  </ButtonTag>
-
-                  <ButtonTag
-                    hide={!applicant.jobAppliant.includes(applyJobId)}
-                    type="button"
-                    onClick={() => handleUnlinkApplicant(applicant.id)}
-                  >
-                    Desvincular
-                  </ButtonTag>
-                </div>
+                <ButtonTag
+                  type="button"
+                  onClick={() => handleAddApplicant(applicant.id)}
+                >
+                  Vincular
+                </ButtonTag>
               </Info>
             );
           })}
@@ -95,7 +77,6 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
 
 const mapStateToProps = (state) => ({
   applyJobStatus: state.ApplicantReducer.applyJobStatus,
-  applicants: state.ApplicantReducer.applicants,
 });
 
 export default connect(mapStateToProps)(ModalApplicantComponent);

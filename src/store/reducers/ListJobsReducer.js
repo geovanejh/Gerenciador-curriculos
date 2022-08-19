@@ -6,7 +6,6 @@ const INITIAL_STATE = {
 const ListJobsReducer = (state = INITIAL_STATE, action) => {
   if (action.type === 'LIST_JOBS') {
     return {
-      ...state,
       jobs: action.jobs,
       isLoading: action.isLoading,
     };

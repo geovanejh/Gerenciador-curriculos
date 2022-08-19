@@ -2,7 +2,6 @@ const INITIAL_STATE = {
   applicant: {},
   applicants: [],
   applyJobStatus: false,
-  unlinkJobStatus: false,
   isLoading: true,
 };
 
@@ -24,12 +23,6 @@ const ApplicantReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         applyJobStatus: action.applyJobStatus,
-        isLoading: action.isLoading,
-      };
-    case "UNLINK_JOB":
-      return {
-        ...state,
-        unlinkJobStatus: action.unlinkJobStatus,
         isLoading: action.isLoading,
       };
     default:
