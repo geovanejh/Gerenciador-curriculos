@@ -1,18 +1,26 @@
+import moment from "moment";
+import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import api from "../api";
 import { Button } from "../components/Button/Button.styled";
 import { CandidatosContainer } from "../components/CandidatosContainer/CandidatosContainer.styled";
 import CandidatosList from "../components/CandidatosList/CandidatosList";
+import Loading from "../components/Loading/Loading";
 import { PageContainerTitle } from "../components/PageStyles/PageContainerTitle";
 import { PageContainerWithBorder } from "../components/PageStyles/PageContainerWithBorder";
-import { DeletaCandidatoById, HandleListApplicants } from "../store/actions/ApplicantAction";
+import PaginadorButtons from "../components/Paginador/PaginadorButtons";
+import { Pager } from "../components/Paginador/PaginadorButtons.styled";
+import { DeletaCandidatoById, getApplicantsWithPagination } from "../store/actions/ApplicantAction";
 
-const Candidatos = ({ dispatch, applicants }) => {
+const Candidatos = ({ dispatch, applicants, loading }) => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [pages, setPages] = useState(1);
   const navigate = useNavigate();
 
-  const setup = () => {
-    HandleListApplicants(dispatch);
+  const setup = async () => {
+    getApplicantsWithPagination(dispatch, currentPage, setPages);
   };
 
   const handleDeleteCandidato = (idCandidato) => {
@@ -21,9 +29,11 @@ const Candidatos = ({ dispatch, applicants }) => {
 
   useEffect(() => {
     setup();
-  }, []);
+  }, [currentPage]);
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <CandidatosContainer>
       <PageContainerTitle>Candidatos cadastrados no sistema</PageContainerTitle>
       <PageContainerWithBorder>
@@ -31,12 +41,16 @@ const Candidatos = ({ dispatch, applicants }) => {
           Adicionar
         </Button>
         <CandidatosList applicants={applicants} handleDeleteCandidato={handleDeleteCandidato} />
+        <Pager>
+          <PaginadorButtons pages={pages} setCurrentPage={setCurrentPage} currentPage={currentPage} />
+        </Pager>
       </PageContainerWithBorder>
     </CandidatosContainer>
   );
 };
 
 const mapStateToProps = (state) => ({
+  loading: state.UtilsReducer.loading,
   applicants: state.ApplicantReducer.applicants,
 });
 

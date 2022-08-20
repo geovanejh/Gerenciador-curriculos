@@ -17,6 +17,10 @@ export const Group = styled.div`
     padding: 0 4px;
     margin-left: 8px;
     border-radius: 4px;
+    > label {
+      color: #fff;
+      cursor: pointer;
+    }
   }
 
   ul li {

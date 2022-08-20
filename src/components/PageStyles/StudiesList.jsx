@@ -1,4 +1,5 @@
 import { formateDateToBrazil } from "../../utils/dates";
+import { limitFieldLength } from "../../utils/utils";
 
 const StudiesList = ({ title, header, items }) => {
   return (
@@ -12,7 +13,7 @@ const StudiesList = ({ title, header, items }) => {
         </li>
         {items.map((elemento, index) => (
           <li key={index}>
-            <p>{elemento.institution}</p>
+            <p>{limitFieldLength(elemento.institution, 20)}</p>
             <p>{elemento.descricao}</p>
             <p>{formateDateToBrazil(elemento.startDate)}</p>
             <p>{formateDateToBrazil(elemento.endDate)}</p>

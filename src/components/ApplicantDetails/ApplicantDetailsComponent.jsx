@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { HandleGetApplicantDetail } from "../../store/actions/ApplicantAction";
+import { editApplicantFile, HandleGetApplicantDetail } from "../../store/actions/ApplicantAction";
 import { connect } from "react-redux";
 import Loading from "../Loading/Loading";
 import { Container } from "../PageStyles/Container";
@@ -12,9 +12,11 @@ import { ListasContainer } from "../PageStyles/ListasContainer";
 import ExperienceList from "../PageStyles/ExperienceList";
 import StudiesList from "../PageStyles/StudiesList";
 import { SeniorityTag } from "../JobCard/JobCardComponent.style";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant, loading }) => {
-  console.log(applicant);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const setup = async () => {
     if (applicantId) {
@@ -46,8 +48,19 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant, loading }
               </Field>
               <Field>Contato: {maskPhone(applicant.phoneNumber)}</Field>
               <Field>
-                <a href={applicant.resumeUrl}>Fazer download do currículo</a>
-                <button>Alterar</button>
+                <a href={applicant.resumeUrl} target="_blank">
+                  Fazer download do currículo
+                </a>
+                <button>
+                  <label htmlFor="botao">Alterar</label>
+                  <input
+                    type="file"
+                    id="botao"
+                    name="botao"
+                    hidden
+                    onChange={(e) => editApplicantFile(id, e.currentTarget.files[0], dispatch, navigate)}
+                  />
+                </button>
               </Field>
             </Group>
             <ListasContainer>

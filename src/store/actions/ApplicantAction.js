@@ -24,6 +24,31 @@ export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
   setLoading(dispatch);
 };
 
+export const getApplicantsWithPagination = async (dispatch, currentPage, setPages) => {
+  setLoading(dispatch);
+  try {
+    const { data } = await api.get(`/candidato/list-candidato-paginado?pagina=${currentPage}&qtRegistro=10`);
+    setPages(data.paginas);
+    const applicants = {
+      type: ActionTypes.listApplicants,
+      applicants: data.content.map((item) => ({
+        id: item.idCandidato,
+        name: item.nome,
+        role: item.cargo,
+        birthdate: moment(item.dataNascimento).format("DD/MM/YYYY"),
+        seniority: item.senioridade,
+        resumeUrl: item.curriculoUrl,
+        jobAppliant: item.vagas.map((item) => item.idVaga),
+      })),
+      isLoading: false,
+    };
+    dispatch(applicants);
+  } catch (error) {
+    toast.error("Erro ao pesquisar candidatos!");
+  }
+  setLoading(dispatch);
+};
+
 export const HandleListApplicants = async (dispatch) => {
   try {
     const { data } = await api.get("/candidato/list-candidato");
@@ -44,7 +69,6 @@ export const HandleListApplicants = async (dispatch) => {
 
     dispatch(applicants);
   } catch (error) {
-    console.log("aq", error);
     toast.error("Erro ao buscar cadanditado");
   }
 };
@@ -140,6 +164,27 @@ export const handleEditApplicant = async (newObj, id, dispatch, navigate) => {
     toast.error("Um erro aconteceu!");
   }
   setLoading(dispatch);
+};
+
+export const editApplicantFile = async (id, file, dispatch, navigate) => {
+  const formData = new FormData();
+
+  formData.append("documento", file);
+
+  setLoading(dispatch);
+  try {
+    await api.put(`candidato/update-documento/${id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    setLoading(dispatch);
+    toast.success("Documento editado com sucesso!");
+    HandleGetApplicantDetail(dispatch, id);
+  } catch (error) {
+    setLoading(dispatch);
+    toast.error("Um erro aconteceu!");
+  }
 };
 
 export const handleCreateNewApplicant = async (formData, dispatch, navigate) => {

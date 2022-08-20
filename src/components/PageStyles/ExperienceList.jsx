@@ -1,4 +1,5 @@
 import { formateDateToBrazil } from "../../utils/dates";
+import { limitFieldLength } from "../../utils/utils";
 
 const ExperienceList = ({ title, header, items }) => {
   return (
@@ -12,7 +13,7 @@ const ExperienceList = ({ title, header, items }) => {
         </li>
         {items.map((elemento, index) => (
           <li key={index}>
-            <p>{elemento.company}</p>
+            <p>{limitFieldLength(elemento.company, 18)}</p>
             <p>{elemento.role}</p>
             <p>{formateDateToBrazil(elemento.startDate)}</p>
             <p>{formateDateToBrazil(elemento.endDate)}</p>

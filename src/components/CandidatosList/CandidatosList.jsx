@@ -3,6 +3,7 @@ import { Lista } from "./CandidatosList.styled";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { Button } from "../Button/Button.styled";
+import { limitFieldLength } from "../../utils/utils";
 
 const CandidatosList = ({ applicants, handleDeleteCandidato }) => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const CandidatosList = ({ applicants, handleDeleteCandidato }) => {
       </li>
       {applicants.map((e) => (
         <li onClick={() => navigate(`/candidato/${e.id}`)}>
-          <p>{e.name}</p>
+          <p>{limitFieldLength(e.name, 20)}</p>
           <p>{e.role}</p>
           <p>{e.seniority}</p>
           <p>{e.birthdate}</p>
