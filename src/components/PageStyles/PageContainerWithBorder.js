@@ -10,6 +10,11 @@ export const PageContainerWithBorder = styled.div`
   gap: 12px;
   margin-bottom: 48px;
 
+  h2,
+  h3 {
+    color: #1ab24e;
+  }
+
   > button {
     align-self: flex-end;
   }

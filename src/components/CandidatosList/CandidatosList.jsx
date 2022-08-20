@@ -7,6 +7,10 @@ import { Button } from "../Button/Button.styled";
 const CandidatosList = ({ applicants, handleDeleteCandidato }) => {
   const navigate = useNavigate();
 
+  const handleEditCandidato = (id) => {
+    navigate(`/candidatos/form/${id}`);
+  };
+
   return (
     <Lista>
       <li>
@@ -16,21 +20,32 @@ const CandidatosList = ({ applicants, handleDeleteCandidato }) => {
         <p>Data de nascimento</p>
       </li>
       {applicants.map((e) => (
-        <li>
+        <li onClick={() => navigate(`/candidato/${e.id}`)}>
           <p>{e.name}</p>
           <p>{e.role}</p>
           <p>{e.seniority}</p>
           <p>{e.birthdate}</p>
           <div>
             <Button
-              onClick={() => navigate(`/candidatos/form/${e.id}`)}
+              onClick={(event) => {
+                event.stopPropagation();
+                handleEditCandidato(e.id);
+              }}
               border="none"
               background="transparent"
               fontSize="16px"
             >
               <FiEdit />
             </Button>
-            <Button onClick={() => handleDeleteCandidato(e.id)} border="none" background="transparent" fontSize="16px">
+            <Button
+              onClick={(event) => {
+                event.stopPropagation();
+                handleDeleteCandidato(e.id);
+              }}
+              border="none"
+              background="transparent"
+              fontSize="16px"
+            >
               <RiDeleteBinFill />
             </Button>
           </div>

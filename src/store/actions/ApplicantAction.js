@@ -4,6 +4,7 @@ import moment from "moment";
 import { setLoading } from "./UtilsAction";
 
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
+  setLoading(dispatch);
   let applicant = {
     type: "DETAIL_APPLICANT",
     isLoading: false,
@@ -18,6 +19,7 @@ export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
   }
 
   dispatch(applicant);
+  setLoading(dispatch);
 };
 
 export const HandleListApplicants = async (dispatch) => {
@@ -104,6 +106,7 @@ const mapFields = (data) => ({
     street: data.endereco.logradouro,
     neighborhood: data.endereco.bairro,
     city: data.endereco.cidade,
+    state: data.endereco.estado,
   },
   scholarity: data?.escolaridade.map((item) => ({
     id: item?.idEscolaridade,
