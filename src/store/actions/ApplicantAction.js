@@ -1,60 +1,59 @@
-import api from "../../api";
-import { toast } from "react-toastify";
-import moment from "moment";
-import { setLoading } from "./UtilsAction";
+import api from '../../api';
+import { toast } from 'react-toastify';
+import moment from 'moment';
+import { setLoading } from './UtilsAction';
 
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
+  let applicant = {
+    type: 'DETAIL_APPLICANT',
+    isLoading: false,
+  };
+
   try {
     const { data } = await api.get(`/candidato/get-candidato/${idCanditado}`);
-    console.log(data);
 
-    const applicant = {
-      type: "DETAIL_APPLICANT",
-      applicant: mapFields(data),
-      isLoading: false,
-    };
-
-    dispatch(applicant);
+    applicant.applicant = mapFields(data);
   } catch (error) {
-    console.log(error);
-    toast.error("Erro ao buscar cadanditado");
+    applicant.applicant = null;
   }
+
+  dispatch(applicant);
 };
 
 export const HandleListApplicants = async (dispatch) => {
   try {
-    const { data } = await api.get("/candidato/list-candidato");
+    const { data } = await api.get('/candidato/list-candidato');
 
     const applicants = {
-      type: "LIST_APPLICANTS",
+      type: 'LIST_APPLICANTS',
       applicants: data.map((item) => ({
         id: item.idCandidato,
         name: item.nome,
         role: item.cargo,
-        birthdate: moment(item.dataNascimento).format("DD/MM/YYYY"),
+        birthdate: moment(item.dataNascimento).format('DD/MM/YYYY'),
         seniority: item.senioridade,
         resumeUrl: item.curriculoUrl,
-        jobAppliant: item.vagas.map(item => item.idVaga)
+        jobAppliant: item.vagas.map((item) => item.idVaga),
       })),
       isLoading: false,
     };
 
     dispatch(applicants);
   } catch (error) {
-    console.log("aq", error);
-    toast.error("Erro ao buscar cadanditado");
+    console.log('aq', error);
+    toast.error('Erro ao buscar cadanditado');
   }
 };
 
 export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
   let applyJobStatus = {
-    type: "APPLY_JOB",
+    type: 'APPLY_JOB',
     applyJobStatus: true,
     isLoading: false,
   };
 
   try {
-    await api.post("/vaga", {
+    await api.post('/vaga', {
       idVaga: jobId,
       candidatos: [
         {
@@ -63,18 +62,22 @@ export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
       ],
     });
 
-    toast.success("Candidato vinculado com sucesso!");
+    toast.success('Candidato vinculado com sucesso!');
   } catch (error) {
     applyJobStatus.applyJobStatus = false;
-    toast.error("Erro ao candidatar para vaga");
+    toast.error('Erro ao candidatar para vaga');
   }
 
   dispatch(applyJobStatus);
 };
 
-export const HandleUnlinkAplicantToJob = async (dispatch, jobId, applicantId) => {
+export const HandleUnlinkAplicantToJob = async (
+  dispatch,
+  jobId,
+  applicantId
+) => {
   let applyJobStatus = {
-    type: "UNLINK_JOB",
+    type: 'UNLINK_JOB',
     unlinkJobStatus: true,
     isLoading: false,
   };
@@ -82,10 +85,10 @@ export const HandleUnlinkAplicantToJob = async (dispatch, jobId, applicantId) =>
   try {
     await api.post(`/vaga/desvincular/vaga/${jobId}/candidato/${applicantId}`);
 
-    toast.success("Candidato desvinculado com sucesso!");
+    toast.success('Candidato desvinculado com sucesso!');
   } catch (error) {
     applyJobStatus.unlinkJobStatus = false;
-    toast.error("Erro ao desvincular condidato da vaga");
+    toast.error('Erro ao desvincular condidato da vaga');
   }
 
   dispatch(applyJobStatus);
@@ -94,7 +97,7 @@ export const HandleUnlinkAplicantToJob = async (dispatch, jobId, applicantId) =>
 const mapFields = (data) => ({
   id: data.idCandidato,
   name: data.nome.toLowerCase(),
-  cpf: data.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4"),
+  cpf: data.cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, '$1.$2.$3-$4'),
   birthdate: data.dataNascimento,
   phoneNumber: data.telefone,
   seniority: data.senioridade,
@@ -126,14 +129,14 @@ const mapFields = (data) => ({
 export const handleEditApplicant = async (newObj, id, dispatch, navigate) => {
   setLoading(dispatch);
   try {
-    await api.put("/candidato/update-candidato", {
+    await api.put('/candidato/update-candidato', {
       ...newObj,
       idCandidato: id,
     });
-    toast.success("Candidato editado com sucesso!");
+    toast.success('Candidato editado com sucesso!');
     navigate(-1);
   } catch (error) {
-    toast.error("Um erro aconteceu!");
+    toast.error('Um erro aconteceu!');
     console.log(error);
   }
   setLoading(dispatch);
@@ -142,15 +145,15 @@ export const handleEditApplicant = async (newObj, id, dispatch, navigate) => {
 export const handleCreateNewApplicant = async (formData, dispatch) => {
   setLoading(dispatch);
   try {
-    await api.post("/candidato", formData, {
+    await api.post('/candidato', formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        'Content-Type': 'multipart/form-data',
       },
     });
-    toast.success("Candidato cadastrado com sucesso!");
+    toast.success('Candidato cadastrado com sucesso!');
   } catch (error) {
     console.log(error);
-    toast.error("Um erro aconteceu!");
+    toast.error('Um erro aconteceu!');
   }
   setLoading(dispatch);
 };
@@ -161,7 +164,7 @@ export const DeletaCandidatoById = async (idCandidato, dispatch) => {
     console.log(data);
     HandleListApplicants(dispatch);
   } catch (error) {
-    console.log("erro: ", error);
+    console.log('erro: ', error);
   }
 };
 
@@ -176,17 +179,17 @@ export const FillApplicantFields = async (
   try {
     const { data } = await api.get(`/candidato/get-candidato/${idCandidato}`);
     console.log(data);
-    formik.setFieldValue("nome", data.nome);
-    formik.setFieldValue("cpf", data.cpf);
-    formik.setFieldValue("dataNascimento", data.dataNascimento);
-    formik.setFieldValue("telefone", data.telefone);
-    formik.setFieldValue("cargo", data.cargo);
-    formik.setFieldValue("senioridade", data.senioridade);
-    formik.setFieldValue("cep", data.endereco.cep);
-    formik.setFieldValue("rua", data.endereco.logradouro);
-    formik.setFieldValue("numero", data.endereco.numero);
-    formik.setFieldValue("bairro", data.endereco.bairro);
-    formik.setFieldValue("cidade", data.endereco.cidade);
+    formik.setFieldValue('nome', data.nome);
+    formik.setFieldValue('cpf', data.cpf);
+    formik.setFieldValue('dataNascimento', data.dataNascimento);
+    formik.setFieldValue('telefone', data.telefone);
+    formik.setFieldValue('cargo', data.cargo);
+    formik.setFieldValue('senioridade', data.senioridade);
+    formik.setFieldValue('cep', data.endereco.cep);
+    formik.setFieldValue('rua', data.endereco.logradouro);
+    formik.setFieldValue('numero', data.endereco.numero);
+    formik.setFieldValue('bairro', data.endereco.bairro);
+    formik.setFieldValue('cidade', data.endereco.cidade);
     setEscolaridade(data.escolaridade);
     setExperiencia(data.experiencia);
   } catch (error) {

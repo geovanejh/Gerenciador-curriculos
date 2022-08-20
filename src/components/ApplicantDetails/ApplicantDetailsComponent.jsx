@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { HandleGetApplicantDetail } from '../../store/actions/ApplicantAction';
-import { connect } from 'react-redux';
-import { Card, Field, Group, Container } from './ApplicantDetails.styles';
+import { useEffect } from "react";
+import { HandleGetApplicantDetail } from "../../store/actions/ApplicantAction";
+import { connect } from "react-redux";
+import { Card, Field, Group, Container } from "./ApplicantDetails.styles";
 
 const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
   const setup = async () => {
@@ -16,7 +16,7 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
 
   return (
     <Container>
-      {applicant && (
+      {applicant ? (
         <Card key={applicant.id}>
           <Group>
             <Field>Nome: {applicant.name}</Field>
@@ -26,7 +26,7 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
             <Field>Senioridade: {applicant.seniority}</Field>
             <Field>Cargo: {applicant.role}</Field>
             <Field>
-              Curriculo: <a href={applicant.resumeUrl}>Download</a>{' '}
+              Curriculo: <a href={applicant.resumeUrl}>Download</a>{" "}
             </Field>
             <Field>Endereço:</Field>
             <Field>Número: {applicant.address?.number}</Field>
@@ -61,6 +61,10 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant }) => {
               })}
           </Group>
         </Card>
+      ) : (
+        <div>
+          <h1>Candidato não encontrado </h1>
+        </div>
       )}
     </Container>
   );

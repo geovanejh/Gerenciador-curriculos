@@ -6,6 +6,7 @@ const Container = styled.div`
   justify-content: center;
 
   margin: 0 auto;
+  padding-top: 14vh;
 `;
 
 const Card = styled.div`
