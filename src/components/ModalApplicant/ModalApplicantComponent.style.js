@@ -11,12 +11,18 @@ const Info = styled.div`
   cursor: pointer;
   flex-direction: column;
   align-items: flex-start;
+
   span {
     margin: 3px 0;
   }
+
   :hover {
     background-color: #00800044;
     transform: scale(1.03);
+  }
+
+  a {
+   text-decoration: none;
   }
 
   @media (max-width: 992px) {

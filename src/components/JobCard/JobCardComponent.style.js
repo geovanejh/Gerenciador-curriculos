@@ -6,7 +6,7 @@ const Card = styled.div`
   box-shadow: 3px 4px 2px 0px black;
   border-radius: 10px;
   background: #f4f2f2;
-  margin: 10px 0;
+  margin: 12px;
   padding: 13px;
   width: 32em;
   background-image: url("./img/patternECOStransparente.png");
@@ -34,6 +34,8 @@ const Card = styled.div`
   @media (max-width: 912px) {
     width: 95%;
     font-size: 30px;
+    margin-bottom: 2vh;
+
     button {
       font-size: 20px;
     }
