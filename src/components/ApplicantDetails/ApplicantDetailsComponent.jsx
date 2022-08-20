@@ -6,10 +6,12 @@ import { Container } from "../PageStyles/Container";
 import { PageContainerTitle } from "../PageStyles/PageContainerTitle";
 import { PageContainerWithBorder } from "../PageStyles/PageContainerWithBorder";
 import { Group } from "../PageStyles/Group";
-import { FormRow } from "../Forms/FormRow";
-import { formateDateToBrazil } from "../../utils/dates";
 import { maskPhone } from "../../utils/masks";
 import { Field } from "../PageStyles/Field";
+import { ListasContainer } from "../PageStyles/ListasContainer";
+import ExperienceList from "../PageStyles/ExperienceList";
+import StudiesList from "../PageStyles/StudiesList";
+import { SeniorityTag } from "../JobCard/JobCardComponent.style";
 
 const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant, loading }) => {
   console.log(applicant);
@@ -36,7 +38,7 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant, loading }
               <h2>{applicant.name.toUpperCase()} </h2>
               <Field>
                 {applicant.role}
-                <span>{applicant.seniority}</span>
+                <SeniorityTag seniority={applicant.seniority}>{applicant.seniority}</SeniorityTag>
               </Field>
               <Field>
                 {applicant.address?.street}, {applicant.address?.number} - {applicant.address?.neighborhood}.{" "}
@@ -45,45 +47,21 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant, loading }
               <Field>Contato: {maskPhone(applicant.phoneNumber)}</Field>
               <Field>
                 <a href={applicant.resumeUrl}>Fazer download do currículo</a>
+                <button>Alterar</button>
               </Field>
             </Group>
-            <Group>
-              <h3>Escolaridade:</h3>
-              <ul>
-                <li>
-                  <p>Instituição</p>
-                  <p>Curso</p>
-                  <p>Data de Início</p>
-                  <p>Data Final</p>
-                </li>
-                {applicant?.scholarity &&
-                  applicant?.scholarity.map((item) => {
-                    return (
-                      <li>
-                        <p>{item.institution}</p>
-                        <p>{item.descricao}</p>
-                        <p>{formateDateToBrazil(item.startDate)}</p>
-                        <p>{formateDateToBrazil(item.endDate)}</p>
-                      </li>
-                    );
-                  })}
-              </ul>
-            </Group>
-            <Group>
-              <h3>Experiência:</h3>
-              {applicant?.experience &&
-                applicant.experience.map((item) => {
-                  return (
-                    <>
-                      <Field>Instituição: {item.company}</Field>
-                      <Field>Descrição: {item.description}</Field>
-                      <Field>Cargo: {item.role}</Field>
-                      <Field>Data de início: {item.startDate}</Field>
-                      <Field>Data de fim: {item.endDate}</Field>
-                    </>
-                  );
-                })}
-            </Group>
+            <ListasContainer>
+              <StudiesList
+                title="ESCOLARIDADE"
+                header={["Instituição", "Curso", "Data de Início", "Data Final"]}
+                items={applicant.scholarity}
+              />
+              <ExperienceList
+                title="EXPERIÊNCIA"
+                header={["Instituição", "Cargo", "Data de Início", "Data Final"]}
+                items={applicant.experience}
+              />
+            </ListasContainer>
           </div>
         ) : (
           <div>

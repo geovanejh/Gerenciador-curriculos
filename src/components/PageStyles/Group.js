@@ -6,7 +6,9 @@ export const Group = styled.div`
   align-items: center;
   margin-bottom: 48px;
 
-  span {
+  button {
+    border: none;
+    cursor: pointer;
     background-color: #0173bc;
     color: white;
     text-transform: uppercase;
@@ -20,6 +22,5 @@ export const Group = styled.div`
   ul li {
     display: grid;
     grid-template-columns: 1fr 1fr 0.5fr 0.5fr;
-    width: 900px;
   }
 `;

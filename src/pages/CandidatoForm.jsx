@@ -7,7 +7,7 @@ import FormCandidato from "../components/FormCandidato/FormCandidato/FormCandida
 import Loading from "../components/Loading/Loading";
 import * as Yup from "yup";
 import { FillApplicantFields, handleCreateNewApplicant, handleEditApplicant } from "../store/actions/ApplicantAction";
-import { formatDateToBackend } from "../utils/dates";
+import { formatDateToBackend, formateDateToBrazil } from "../utils/dates";
 import { maskOnlyNumbers } from "../utils/masks";
 
 const CandidatoForm = ({ applicant, dispatch, loading }) => {
@@ -57,6 +57,14 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
 
       console.log();
 
+      const scholarity = escolaridade.map((e) => {
+        return { ...e, dataInicio: formatDateToBackend(e.dataInicio), dataFim: formatDateToBackend(e.dataFim) };
+      });
+
+      const experience = experiencia.map((e) => {
+        return { ...e, dataInicio: formatDateToBackend(e.dataInicio), dataFim: formatDateToBackend(e.dataFim) };
+      });
+
       const newObj = {
         nome: values.nome.trim(),
         cpf: maskOnlyNumbers(values.cpf),
@@ -72,8 +80,8 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
           cidade: values.cidade,
           estado: values.estado,
         },
-        escolaridades: escolaridade,
-        experiencias: experiencia,
+        escolaridades: scholarity,
+        experiencias: experience,
       };
 
       console.log(newObj);

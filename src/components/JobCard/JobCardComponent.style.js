@@ -71,12 +71,13 @@ const handleSeniorityBackground = (seniority) => {
 
 const SeniorityTag = styled.span`
   background-color: ${({ seniority }) => handleSeniorityBackground(seniority)};
-  color: ${(props) => props.color || "#403838"};
-  border-radius: 14px;
-  font-size: 14px;
-  padding: 4px 8px;
-  margin: 0 0.5em;
-  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0 4px;
+  margin-left: 8px;
+  border-radius: 4px;
 `;
 
 export { Card, List, Item, SeniorityTag };

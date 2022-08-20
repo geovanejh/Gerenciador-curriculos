@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { maskCPF, maskDate, maskOnlyLetters, maskOnlyNumbers, maskPhone } from "../../../utils/masks";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
@@ -5,6 +6,8 @@ import SelectField from "../../Forms/SelectField/SelectField";
 import { FormContent } from "../FormCandidato/FormCandidato.styled";
 
 const PersonalData = ({ formik }) => {
+  const { id } = useParams();
+
   return (
     <FormContent>
       <FormRow grid="1fr 1fr 0.5fr">
@@ -78,15 +81,17 @@ const PersonalData = ({ formik }) => {
           />
         </div>
       </FormRow>
-      <input
-        type="file"
-        name="personalFile"
-        onBlur={formik.handleBlur}
-        id="personalFile"
-        onChange={(event) => {
-          formik.setFieldValue("personalFile", event.currentTarget.files[0]);
-        }}
-      />
+      {!id && (
+        <input
+          type="file"
+          name="personalFile"
+          onBlur={formik.handleBlur}
+          id="personalFile"
+          onChange={(event) => {
+            formik.setFieldValue("personalFile", event.currentTarget.files[0]);
+          }}
+        />
+      )}
       {formik.touched.personalFile && formik.errors.personalFile ? <span>{formik.errors.personalFile}</span> : null}
     </FormContent>
   );

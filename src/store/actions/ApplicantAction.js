@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import moment from "moment";
 
-import { ActionTypes } from '../ActionTypes';
+import { ActionTypes } from "../ActionTypes";
 import api from "../../api";
 import { setLoading } from "./UtilsAction";
 
@@ -138,7 +138,6 @@ export const handleEditApplicant = async (newObj, id, dispatch, navigate) => {
     navigate(-1);
   } catch (error) {
     toast.error("Um erro aconteceu!");
-    console.log(error);
   }
   setLoading(dispatch);
 };
@@ -154,7 +153,6 @@ export const handleCreateNewApplicant = async (formData, dispatch, navigate) => 
     toast.success("Candidato cadastrado com sucesso!");
     navigate(-1);
   } catch (error) {
-    console.log(error);
     toast.error("Um erro aconteceu!");
   }
   setLoading(dispatch);
@@ -163,10 +161,10 @@ export const handleCreateNewApplicant = async (formData, dispatch, navigate) => 
 export const DeletaCandidatoById = async (idCandidato, dispatch) => {
   try {
     const { data } = await api.delete(`candidato/${idCandidato}`);
-    console.log(data);
     HandleListApplicants(dispatch);
+    toast.success("Candidato deletado com sucesso!");
   } catch (error) {
-    console.log("erro: ", error);
+    toast.error("Não foi possível deletar o candidato, tente novamente!");
   }
 };
 
@@ -174,7 +172,6 @@ export const FillApplicantFields = async (idCandidato, formik, setExperiencia, s
   setLoading(dispatch);
   try {
     const { data } = await api.get(`/candidato/get-candidato/${idCandidato}`);
-    console.log(data);
     formik.setFieldValue("nome", data.nome);
     formik.setFieldValue("cpf", data.cpf);
     formik.setFieldValue("dataNascimento", data.dataNascimento);
@@ -189,7 +186,7 @@ export const FillApplicantFields = async (idCandidato, formik, setExperiencia, s
     setEscolaridade(data.escolaridade);
     setExperiencia(data.experiencia);
   } catch (error) {
-    console.log(error);
+    toast.error("Um erro aconteceu ao pesquisar o candidato, tente novamente!");
   }
   setLoading(dispatch);
 };
