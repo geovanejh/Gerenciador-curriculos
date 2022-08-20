@@ -1,12 +1,14 @@
-import api from "../../api";
 import { toast } from "react-toastify";
 import moment from "moment";
+
+import { ActionTypes } from '../ActionTypes';
+import api from "../../api";
 import { setLoading } from "./UtilsAction";
 
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
   setLoading(dispatch);
   let applicant = {
-    type: "DETAIL_APPLICANT",
+    type: ActionTypes.detailApplicant,
     isLoading: false,
   };
 
@@ -27,7 +29,7 @@ export const HandleListApplicants = async (dispatch) => {
     const { data } = await api.get("/candidato/list-candidato");
 
     const applicants = {
-      type: "LIST_APPLICANTS",
+      type: ActionTypes.listApplicants,
       applicants: data.map((item) => ({
         id: item.idCandidato,
         name: item.nome,
@@ -49,7 +51,7 @@ export const HandleListApplicants = async (dispatch) => {
 
 export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
   let applyJobStatus = {
-    type: "APPLY_JOB",
+    type: ActionTypes.applyJob,
     applyJobStatus: true,
     isLoading: false,
   };
@@ -75,7 +77,7 @@ export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
 
 export const HandleUnlinkAplicantToJob = async (dispatch, jobId, applicantId) => {
   let applyJobStatus = {
-    type: "UNLINK_JOB",
+    type: ActionTypes.unlinkJob,
     unlinkJobStatus: true,
     isLoading: false,
   };
