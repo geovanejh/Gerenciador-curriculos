@@ -11,6 +11,32 @@ const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade, e
     if (step <= 3) {
       setStep(step + 1);
     }
+    // if (
+    //   (step === 1 &&
+    //     !formik.errors.telefone &&
+    //     !formik.errors.cargo &&
+    //     !formik.errors.senioridade &&
+    //     !formik.errors.personalFile) ||
+    //   (step === 2 &&
+    //     !formik.errors.cep &&
+    //     !formik.errors.rua &&
+    //     !formik.errors.numero &&
+    //     !formik.errors.bairro &&
+    //     !formik.errors.cidade &&
+    //     !formik.errors.estado)
+    // ) {
+    //   setStep(step + 1);
+    // }
+    // else if (step === 3 && escolaridade.length > 0) {
+    //   escolaridade.map((e) => {
+    //     if (!e.nivel || !e.descricao || !e.instituicao || !e.dataInicio || !e.dataFim) {
+    //       setErro(true);
+    //     } else {
+    //       setErro(false);
+    //     }
+    //   });
+    //   !erro ? setStep(step + 1) : console.log(escolaridade);
+    // }
   };
 
   const decrementaStep = () => {
@@ -28,9 +54,13 @@ const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade, e
         {step === 3 && <StudiesData formik={formik} escolaridade={escolaridade} setEscolaridade={setEscolaridade} />}
         {step === 4 && <ExperienceData formik={formik} experiencia={experiencia} setExperiencia={setExperiencia} />}
         <ButtonContainer>
-          <Button type="button" primary onClick={decrementaStep}>
-            Voltar
-          </Button>
+          {step > 1 ? (
+            <Button type="button" primary onClick={decrementaStep}>
+              Voltar
+            </Button>
+          ) : (
+            <span />
+          )}
 
           {step < 4 ? (
             <>

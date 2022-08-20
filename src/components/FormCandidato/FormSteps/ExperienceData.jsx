@@ -1,7 +1,7 @@
+import { maskDate } from "../../../utils/masks";
 import { Button } from "../../Button/Button.styled";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
-import SelectField from "../../Forms/SelectField/SelectField";
 import { DinamicFormContent, FormContent, RemoveButton } from "../FormCandidato/FormCandidato.styled";
 
 const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
@@ -30,7 +30,10 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
 
         return {
           ...item,
-          [event.target.name]: event.target.value,
+          [event.target.name]:
+            event.target.name === "dataFim" || event.target.name === "dataInicio"
+              ? maskDate(event.target.value)
+              : event.target.value,
         };
       });
     });
@@ -53,7 +56,7 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
               id="instituicao"
               type="text"
               name="instituicao"
-              placeholder="instituicao"
+              placeholder="Ex: DBC Company"
               onBlur={formik.handleBlur}
               value={item.instituicao}
               onChange={(e) => onChange(index, e)}
@@ -96,7 +99,7 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
               id="descricao"
               type="text"
               name="descricao"
-              placeholder="00/00/0000"
+              placeholder="Descreva suas principais atividades"
               value={item.descricao}
               onChange={(e) => onChange(index, e)}
             />

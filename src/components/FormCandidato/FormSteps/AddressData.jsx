@@ -1,5 +1,8 @@
+import { ESTADOS } from "../../../utils/lists";
+import { maskCEP, maskOnlyNumbers } from "../../../utils/masks";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
+import SelectField from "../../Forms/SelectField/SelectField";
 import { FormContent } from "../FormCandidato/FormCandidato.styled";
 
 const AddressData = ({ formik }) => {
@@ -11,7 +14,7 @@ const AddressData = ({ formik }) => {
           placeholder="00000-000"
           id="cep"
           type="text"
-          onChange={formik.handleChange}
+          onChange={(e) => formik.setFieldValue("cep", maskCEP(e.target.value))}
           value={formik.values.cep}
           onBlur={formik.handleBlur}
           formik={formik}
@@ -27,11 +30,11 @@ const AddressData = ({ formik }) => {
           formik={formik}
         />
         <FormField
-          label="numero"
+          label="número"
           placeholder="Ex: 0000"
           id="numero"
           type="text"
-          onChange={formik.handleChange}
+          onChange={(e) => formik.setFieldValue("numero", maskOnlyNumbers(e.target.value))}
           value={formik.values.numero}
           onBlur={formik.handleBlur}
           formik={formik}
@@ -51,7 +54,7 @@ const AddressData = ({ formik }) => {
 
         <FormField
           label="cidade"
-          placeholder="Ex: São Paulo"
+          placeholder="Ex: Porto Alegre"
           id="cidade"
           type="text"
           onChange={formik.handleChange}
@@ -59,15 +62,14 @@ const AddressData = ({ formik }) => {
           onBlur={formik.handleBlur}
           formik={formik}
         />
-        <FormField
-          label="estado"
-          placeholder="Ex: Rio Grande do Sul"
+        <SelectField
+          formik={formik}
+          options={ESTADOS}
+          label="Estado"
           id="estado"
-          type="text"
           onChange={formik.handleChange}
           value={formik.values.estado}
           onBlur={formik.handleBlur}
-          formik={formik}
         />
       </FormRow>
     </FormContent>

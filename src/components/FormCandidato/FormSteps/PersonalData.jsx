@@ -1,3 +1,4 @@
+import { maskCPF, maskDate, maskOnlyLetters, maskOnlyNumbers, maskPhone } from "../../../utils/masks";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
 import SelectField from "../../Forms/SelectField/SelectField";
@@ -22,7 +23,7 @@ const PersonalData = ({ formik }) => {
           placeholder="000.000.000-00"
           type="text"
           id="cpf"
-          onChange={formik.handleChange}
+          onChange={(e) => formik.setFieldValue("cpf", maskCPF(e.target.value))}
           value={formik.values.cpf}
           onBlur={formik.handleBlur}
           formik={formik}
@@ -32,7 +33,7 @@ const PersonalData = ({ formik }) => {
           placeholder="00/00/0000"
           type="text"
           id="dataNascimento"
-          onChange={formik.handleChange}
+          onChange={(e) => formik.setFieldValue("dataNascimento", maskDate(e.target.value))}
           value={formik.values.dataNascimento}
           onBlur={formik.handleBlur}
           formik={formik}
@@ -44,7 +45,7 @@ const PersonalData = ({ formik }) => {
           placeholder="(00)00000-0000"
           type="text"
           id="telefone"
-          onChange={formik.handleChange}
+          onChange={(e) => formik.setFieldValue("telefone", maskPhone(e.target.value))}
           value={formik.values.telefone}
           onBlur={formik.handleBlur}
           formik={formik}
@@ -59,17 +60,23 @@ const PersonalData = ({ formik }) => {
           onBlur={formik.handleBlur}
           formik={formik}
         />
-        <SelectField
-          options={[
-            { id: "JUNIOR", nome: "Júnior" },
-            { id: "PLENO", nome: "Pleno" },
-          ]}
-          label="Senioridade"
-          id="senioridade"
-          onChange={formik.handleChange}
-          value={formik.values.senioridade}
-          onBlur={formik.handleBlur}
-        />
+        <div>
+          <SelectField
+            formik={formik}
+            options={[
+              { id: "", nome: "" },
+              { id: "JUNIOR", nome: "Júnior" },
+              { id: "PLENO", nome: "Pleno" },
+              { id: "SENIOR", nome: "Sênior" },
+              { id: "ESPECIALISTA", nome: "Especialista" },
+            ]}
+            label="Senioridade"
+            id="senioridade"
+            onChange={formik.handleChange}
+            value={formik.values.senioridade}
+            onBlur={formik.handleBlur}
+          />
+        </div>
       </FormRow>
       <input
         type="file"
@@ -80,6 +87,7 @@ const PersonalData = ({ formik }) => {
           formik.setFieldValue("personalFile", event.currentTarget.files[0]);
         }}
       />
+      {formik.touched.personalFile && formik.errors.personalFile ? <span>{formik.errors.personalFile}</span> : null}
     </FormContent>
   );
 };

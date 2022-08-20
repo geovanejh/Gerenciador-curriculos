@@ -1,8 +1,9 @@
+import { maskDate } from "../../../utils/masks";
 import { Button } from "../../Button/Button.styled";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";
 import SelectField from "../../Forms/SelectField/SelectField";
-import { DinamicFormContent, FormContent, RemoveButton, Teste } from "../FormCandidato/FormCandidato.styled";
+import { DinamicFormContent, FormContent, RemoveButton } from "../FormCandidato/FormCandidato.styled";
 
 const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
   const handleAddLink = (e) => {
@@ -30,7 +31,10 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
 
         return {
           ...item,
-          [event.target.name]: event.target.value,
+          [event.target.name]:
+            event.target.name === "dataFim" || event.target.name === "dataInicio"
+              ? maskDate(event.target.value)
+              : event.target.value,
         };
       });
     });
@@ -48,9 +52,13 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
         <div>
           <FormRow grid="0.5fr 1fr">
             <SelectField
+              formik={formik}
               options={[
+                { id: "", nome: "" },
+                { id: "MEDIO", nome: "Médio" },
                 { id: "TECNICO", nome: "Técnico" },
                 { id: "SUPERIOR", nome: "Superior" },
+                { id: "Outro", nome: "Outro" },
               ]}
               label="Nível"
               type="text"
@@ -78,7 +86,7 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
               type="text"
               name="instituicao"
               value={item.instituicao}
-              placeholder="instituicao"
+              placeholder="Ex: Universidade Federal do Rio Grande do Sul"
               onBlur={formik.handleBlur}
               onChange={(e) => onChange(index, e)}
             />

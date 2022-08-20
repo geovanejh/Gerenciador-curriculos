@@ -5,7 +5,10 @@ import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import FormCandidato from "../components/FormCandidato/FormCandidato/FormCandidato";
 import Loading from "../components/Loading/Loading";
+import * as Yup from "yup";
 import { FillApplicantFields, handleCreateNewApplicant, handleEditApplicant } from "../store/actions/ApplicantAction";
+import { formatDateToBackend } from "../utils/dates";
+import { maskOnlyNumbers } from "../utils/masks";
 
 const CandidatoForm = ({ applicant, dispatch, loading }) => {
   const navigate = useNavigate();
@@ -20,24 +23,49 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
       dataFim: "",
     },
   ]);
-  const [experiencia, setExperiencia] = useState([]);
+  const [experiencia, setExperiencia] = useState([
+    {
+      instituicao: "",
+      descricao: "",
+      cargo: "",
+      dataInicio: "",
+      dataFim: "",
+    },
+  ]);
 
   const formik = useFormik({
     initialValues: {},
+    validationSchema: Yup.object({
+      nome: Yup.string().min(3, "- Curto demais.").required("- Obrigatório"),
+      cpf: Yup.string().min(14, "- Curto demais.").required("- Obrigatório"),
+      dataNascimento: Yup.string().min(10, "- Curto demais.").required("- Obrigatório"),
+      telefone: Yup.string().min(14, "- Curto demais.").required("- Obrigatório"),
+      cargo: Yup.string().required("- Obrigatório"),
+      senioridade: Yup.string().required("- Obrigatório"),
+      personalFile: Yup.string().required("- Obrigatório"),
+      cep: Yup.string().min(9, "- Formato incorreto.").max(9, "- Formato incorreto.").required("- Obrigatório."),
+      rua: Yup.string().max(30, "- Longo demais.").required("- Obrigatório."),
+      numero: Yup.string().required("- Obrigatório."),
+      bairro: Yup.string().required("- Obrigatório."),
+      cidade: Yup.string().required("- Obrigatório."),
+      estado: Yup.string().required("- Obrigatório."),
+    }),
     onSubmit: (values) => {
       console.log("values: ", values);
       console.log("escolaridade: ", escolaridade);
       console.log("experiencia: ", experiencia);
 
+      console.log();
+
       const newObj = {
-        nome: values.nome,
-        cpf: values.cpf,
-        dataNascimento: values.dataNascimento,
-        telefone: values.telefone,
+        nome: values.nome.trim(),
+        cpf: maskOnlyNumbers(values.cpf),
+        dataNascimento: formatDateToBackend(values.dataNascimento),
+        telefone: maskOnlyNumbers(values.telefone),
         senioridade: values.senioridade,
         cargo: values.cargo,
         endereco: {
-          cep: values.cep,
+          cep: maskOnlyNumbers(values.cep),
           numero: values.numero,
           logradouro: values.rua,
           bairro: values.bairro,
@@ -47,6 +75,8 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
         escolaridades: escolaridade,
         experiencias: experiencia,
       };
+
+      console.log(newObj);
 
       const formData = new FormData();
       const imagefile = values.personalFile;

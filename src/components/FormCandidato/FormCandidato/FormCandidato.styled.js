@@ -27,6 +27,15 @@ export const FormContent = styled.div`
   flex-direction: column;
   gap: 24px;
   margin-bottom: 24px;
+
+  span {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    color: red;
+  }
 `;
 
 export const DinamicFormContent = styled.div`
