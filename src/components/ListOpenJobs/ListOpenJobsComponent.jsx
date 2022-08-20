@@ -10,6 +10,7 @@ import {
   Container,
   PaginationContainer,
   Msg,
+  GridContainer
 } from './ListOpenJobsComponent.style';
 
 const ListOpenJobs = ({ isLoading, jobs, dispatch }) => {
@@ -31,10 +32,12 @@ const ListOpenJobs = ({ isLoading, jobs, dispatch }) => {
   ) : (
     <Container>
       <Msg>Lista de vagas</Msg>
-      {jobs &&
-        jobs.jobs.map((job, index) => (
-          <JobCardComponent job={job} key={index} />
-        ))}
+      <GridContainer>
+        {jobs &&
+          jobs.jobs.map((job, index) => (
+            <JobCardComponent job={job} key={index} />
+          ))}
+      </GridContainer>
       <div>
         <PaginationContainer
           breakLabel="..."

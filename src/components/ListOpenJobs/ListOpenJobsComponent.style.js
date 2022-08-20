@@ -8,6 +8,13 @@ const Container = styled.div`
   margin-top: 12vh;
 `;
 
+const GridContainer = styled.div`
+  @media (min-width: 912px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
 const PaginationContainer = styled(ReactPaginate)`
   list-style-type: none;
   display: flex;
@@ -36,4 +43,4 @@ const Msg = styled.h1`
   -webkit-text-fill-color: transparent;
 `;
 
-export { Container, PaginationContainer, Msg };
+export { Container, PaginationContainer, Msg, GridContainer };

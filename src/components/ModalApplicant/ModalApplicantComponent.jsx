@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
+import { FaDownload } from 'react-icons/fa';
 import Modal from 'react-modal';
 
 import {
@@ -67,7 +68,7 @@ const ModalApplicantComponent = ({ jobId, applicants, dispatch }) => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    download
+                    &nbsp;<FaDownload />
                   </a>
                 </span>
                 <div>
