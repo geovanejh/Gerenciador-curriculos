@@ -1,3 +1,5 @@
+import { ActionTypes } from '../ActionTypes';
+
 const INITIAL_STATE = {
   applicant: {},
   applicants: [],
@@ -8,25 +10,25 @@ const INITIAL_STATE = {
 
 const ApplicantReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "DETAIL_APPLICANT":
+    case ActionTypes.detailApplicant:
       return {
         ...state,
         applicant: action.applicant,
         isLoading: action.isLoading,
       };
-    case "LIST_APPLICANTS":
+    case ActionTypes.listApplicants:
       return {
         ...state,
         applicants: action.applicants,
         isLoading: action.isLoading,
       };
-    case "APPLY_JOB":
+    case ActionTypes.applyJob:
       return {
         ...state,
         applyJobStatus: action.applyJobStatus,
         isLoading: action.isLoading,
       };
-    case "UNLINK_JOB":
+    case ActionTypes.unlinkJob:
       return {
         ...state,
         unlinkJobStatus: action.unlinkJobStatus,
