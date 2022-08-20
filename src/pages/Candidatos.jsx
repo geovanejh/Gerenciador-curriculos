@@ -10,7 +10,6 @@ import { DeletaCandidatoById, HandleListApplicants } from "../store/actions/Appl
 
 const Candidatos = ({ dispatch, applicants }) => {
   const navigate = useNavigate();
-  console.log(applicants);
 
   const setup = () => {
     HandleListApplicants(dispatch);
