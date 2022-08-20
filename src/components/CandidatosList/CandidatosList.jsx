@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Lista } from "./CandidatosList.styled";
+import { RiDeleteBinFill } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
+import { Button } from "../Button/Button.styled";
 
 const CandidatosList = ({ applicants, handleDeleteCandidato }) => {
   const navigate = useNavigate();
@@ -18,8 +21,19 @@ const CandidatosList = ({ applicants, handleDeleteCandidato }) => {
           <p>{e.role}</p>
           <p>{e.seniority}</p>
           <p>{e.birthdate}</p>
-          <button onClick={() => navigate(`/candidatos/form/${e.id}`)}> editar </button>
-          <button onClick={() => handleDeleteCandidato(e.id)}> excluir </button>
+          <div>
+            <Button
+              onClick={() => navigate(`/candidatos/form/${e.id}`)}
+              border="none"
+              background="transparent"
+              fontSize="16px"
+            >
+              <FiEdit />
+            </Button>
+            <Button onClick={() => handleDeleteCandidato(e.id)} border="none" background="transparent" fontSize="16px">
+              <RiDeleteBinFill />
+            </Button>
+          </div>
         </li>
       ))}
     </Lista>
