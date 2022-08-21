@@ -20,16 +20,35 @@ const PaginationContainer = styled(ReactPaginate)`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
 
   li {
-    margin: 0 5px;
+    > a {
+      padding: 4px 8px;
+    }
 
+    &.selected {
+      padding: 4px 0;
+      background-color: #1ab24e;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+    
+    margin: 0 5px;
+    text-decoration: none;
     cursor: pointer;
   }
 
   li :hover {
-    color: #00a8ff;
-    border-bottom: 1px solid black;
+    padding: 4px 8px;
+    color: white;
+    background-color: #ddd;
+    border-radius: 5px;
+
+    a {
+      background-color: #1ab24e;
+      margin: 0;
+    }
   }
 `;
 
