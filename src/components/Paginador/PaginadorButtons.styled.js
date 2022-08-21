@@ -11,6 +11,7 @@ export const PaginadorButton = styled.button`
   padding: 6px 12px;
   text-decoration: none;
   border-radius: 5px;
+  cursor: pointer;
 
   font-size: 12px;
 

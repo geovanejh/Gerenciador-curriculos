@@ -42,7 +42,7 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
       telefone: Yup.string().min(14, "- Curto demais.").required("- Obrigatório"),
       cargo: Yup.string().required("- Obrigatório"),
       senioridade: Yup.string().required("- Obrigatório"),
-      personalFile: Yup.string().required("- Obrigatório"),
+      personalFile: !id && Yup.string().required("- Obrigatório"),
       cep: Yup.string().min(9, "- Formato incorreto.").max(9, "- Formato incorreto.").required("- Obrigatório."),
       rua: Yup.string().max(30, "- Longo demais.").required("- Obrigatório."),
       numero: Yup.string().required("- Obrigatório."),
@@ -51,12 +51,6 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
       estado: Yup.string().required("- Obrigatório."),
     }),
     onSubmit: (values) => {
-      console.log("values: ", values);
-      console.log("escolaridade: ", escolaridade);
-      console.log("experiencia: ", experiencia);
-
-      console.log();
-
       const scholarity = escolaridade.map((e) => {
         return { ...e, dataInicio: formatDateToBackend(e.dataInicio), dataFim: formatDateToBackend(e.dataFim) };
       });
@@ -84,8 +78,6 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
         experiencias: experience,
       };
 
-      console.log(newObj);
-
       const formData = new FormData();
       const imagefile = values.personalFile;
       formData.append(
@@ -109,7 +101,6 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
       setup(id);
     }
   }, []);
-
   return loading ? (
     <Loading />
   ) : (

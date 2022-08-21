@@ -7,7 +7,6 @@ import DashboardContainer from "./Dashboard.style";
 
 const Dashboard = ({ loading, dispatch }) => {
   const navigate = useNavigate();
-  console.log(loading);
 
   return loading ? (
     <Loading />

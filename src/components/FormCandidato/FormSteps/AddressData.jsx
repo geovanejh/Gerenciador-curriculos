@@ -1,3 +1,4 @@
+import { getCepData } from "../../../store/actions/ApplicantAction";
 import { ESTADOS } from "../../../utils/lists";
 import { maskCEP, maskOnlyNumbers } from "../../../utils/masks";
 import FormField from "../../Forms/FormField/FormField";
@@ -16,7 +17,12 @@ const AddressData = ({ formik }) => {
           type="text"
           onChange={(e) => formik.setFieldValue("cep", maskCEP(e.target.value))}
           value={formik.values.cep}
-          onBlur={formik.handleBlur}
+          onBlur={(e) => {
+            formik.handleBlur(e);
+            if (formik.values.cep.length === 9) {
+              getCepData(formik.values.cep, formik);
+            }
+          }}
           formik={formik}
         />
         <FormField

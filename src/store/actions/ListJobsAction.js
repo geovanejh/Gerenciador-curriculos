@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
 import { ActionTypes } from "../ActionTypes";
-import api from "../../api";
+import { api } from "../../api";
 
 export const HandleListJobs = async (dispatch, pageNumber = 1, pageLength = 10) => {
   try {

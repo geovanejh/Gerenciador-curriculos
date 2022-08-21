@@ -14,7 +14,7 @@ const ExperienceList = ({ title, header, items }) => {
         {items.map((elemento, index) => (
           <li key={index}>
             <p>{limitFieldLength(elemento.company, 18)}</p>
-            <p>{elemento.role}</p>
+            <p>{limitFieldLength(elemento.role, 20)}</p>
             <p>{formateDateToBrazil(elemento.startDate)}</p>
             <p>{formateDateToBrazil(elemento.endDate)}</p>
           </li>

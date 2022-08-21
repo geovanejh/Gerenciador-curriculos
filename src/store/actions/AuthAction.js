@@ -1,6 +1,6 @@
-import api from "../../api";
 import { setLoading } from "./UtilsAction";
 import { toast } from "react-toastify";
+import { api } from "../../api";
 
 export const handleLogin = async (values, dispatch, navigate) => {
   setLoading(dispatch);

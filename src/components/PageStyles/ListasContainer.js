@@ -10,7 +10,7 @@ export const ListasContainer = styled.div`
 
     ul > li {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 0.7fr 0.7fr;
 
       p {
         font-size: 12px;

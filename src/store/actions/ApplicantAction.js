@@ -2,8 +2,11 @@ import { toast } from "react-toastify";
 import moment from "moment";
 
 import { ActionTypes } from "../ActionTypes";
-import api from "../../api";
+import { api, cepApi } from "../../api";
 import { setLoading } from "./UtilsAction";
+import { maskCEP, maskCPF, maskPhone } from "../../utils/masks";
+import { formatDateToBackend, formateDateToBrazil } from "../../utils/dates";
+import { formataNumeroFrontEnd } from "../../utils/utils";
 
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
   setLoading(dispatch);
@@ -22,6 +25,22 @@ export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
 
   dispatch(applicant);
   setLoading(dispatch);
+};
+
+export const getCepData = async (cep, formik) => {
+  try {
+    const { data } = await cepApi.get(`${cep.replace("-", "")}/json/`);
+    if (data.erro) {
+      toast.error("CEP não encontrado.");
+    } else {
+      formik.setFieldValue("rua", data.logradouro);
+      formik.setFieldValue("bairro", data.bairro);
+      formik.setFieldValue("cidade", data.localidade);
+      formik.setFieldValue("estado", data.uf);
+    }
+  } catch (error) {
+    toast.error("Erro ao buscar CEP.");
+  }
 };
 
 export const getApplicantsWithPagination = async (dispatch, currentPage, setPages) => {
@@ -161,6 +180,7 @@ export const handleEditApplicant = async (newObj, id, dispatch, navigate) => {
     toast.success("Candidato editado com sucesso!");
     navigate(-1);
   } catch (error) {
+    console.log(error);
     toast.error("Um erro aconteceu!");
   }
   setLoading(dispatch);
@@ -198,7 +218,13 @@ export const handleCreateNewApplicant = async (formData, dispatch, navigate) => 
     toast.success("Candidato cadastrado com sucesso!");
     navigate(-1);
   } catch (error) {
-    toast.error("Um erro aconteceu!");
+    if (error.response.data.errors) {
+      error.response.data.errors.map((e) => {
+        toast.error(e);
+      });
+    } else {
+      toast.error("Um erro aconteceu!");
+    }
   }
   setLoading(dispatch);
 };
@@ -218,18 +244,28 @@ export const FillApplicantFields = async (idCandidato, formik, setExperiencia, s
   try {
     const { data } = await api.get(`/candidato/get-candidato/${idCandidato}`);
     formik.setFieldValue("nome", data.nome);
-    formik.setFieldValue("cpf", data.cpf);
-    formik.setFieldValue("dataNascimento", data.dataNascimento);
-    formik.setFieldValue("telefone", data.telefone);
+    formik.setFieldValue("cpf", maskCPF(data.cpf));
+    formik.setFieldValue("dataNascimento", formateDateToBrazil(data.dataNascimento));
+    formik.setFieldValue("telefone", formataNumeroFrontEnd(data.telefone));
     formik.setFieldValue("cargo", data.cargo);
     formik.setFieldValue("senioridade", data.senioridade);
-    formik.setFieldValue("cep", data.endereco.cep);
+    formik.setFieldValue("cep", maskCEP(data.endereco.cep));
     formik.setFieldValue("rua", data.endereco.logradouro);
     formik.setFieldValue("numero", data.endereco.numero);
     formik.setFieldValue("bairro", data.endereco.bairro);
     formik.setFieldValue("cidade", data.endereco.cidade);
-    setEscolaridade(data.escolaridade);
-    setExperiencia(data.experiencia);
+    formik.setFieldValue("estado", data.endereco.estado);
+
+    const scholarity = data.escolaridade.map((e) => {
+      return { ...e, dataInicio: formateDateToBrazil(e.dataInicio), dataFim: formateDateToBrazil(e.dataFim) };
+    });
+
+    const experience = data.experiencia.map((e) => {
+      return { ...e, dataInicio: formateDateToBrazil(e.dataInicio), dataFim: formateDateToBrazil(e.dataFim) };
+    });
+
+    setEscolaridade(scholarity);
+    setExperiencia(experience);
   } catch (error) {
     toast.error("Um erro aconteceu ao pesquisar o candidato, tente novamente!");
   }

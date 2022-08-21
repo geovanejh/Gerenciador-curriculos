@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import api from "../api";
 import { Button } from "../components/Button/Button.styled";
 import { CandidatosContainer } from "../components/CandidatosContainer/CandidatosContainer.styled";
 import CandidatosList from "../components/CandidatosList/CandidatosList";

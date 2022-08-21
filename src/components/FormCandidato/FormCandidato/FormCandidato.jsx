@@ -8,35 +8,57 @@ import { ButtonContainer, FormContainer, SteppedForm } from "./FormCandidato.sty
 
 const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade, experiencia, setExperiencia }) => {
   const incrementaStep = () => {
-    if (step <= 3) {
-      setStep(step + 1);
+    switch (step) {
+      case 1:
+        formik.setTouched({
+          ...formik.touched,
+          ["nome"]: true,
+          ["cpf"]: true,
+          ["dataNascimento"]: true,
+          ["telefone"]: true,
+          ["cargo"]: true,
+          ["senioridade"]: true,
+          ["personalFile"]: true,
+        });
+        if (
+          !formik.errors.nome &&
+          !formik.errors.cpf &&
+          !formik.errors.dataNascimento &&
+          !formik.errors.telefone &&
+          !formik.errors.cargo &&
+          !formik.errors.senioridade &&
+          !formik.errors.personalFile
+        ) {
+          setStep(step + 1);
+        }
+        break;
+      case 2:
+        formik.setTouched({
+          ...formik.touched,
+          ["cep"]: true,
+          ["rua"]: true,
+          ["numero"]: true,
+          ["bairro"]: true,
+          ["cidade"]: true,
+          ["estado"]: true,
+        });
+        if (
+          !formik.errors.cep &&
+          !formik.errors.rua &&
+          !formik.errors.numero &&
+          !formik.errors.bairro &&
+          !formik.errors.cidade &&
+          !formik.errors.estado
+        ) {
+          setStep(step + 1);
+        }
+        break;
+      case 3 || 4:
+        setStep(step + 1);
+        break;
+      default:
+        return;
     }
-    // if (
-    //   (step === 1 &&
-    //     !formik.errors.telefone &&
-    //     !formik.errors.cargo &&
-    //     !formik.errors.senioridade &&
-    //     !formik.errors.personalFile) ||
-    //   (step === 2 &&
-    //     !formik.errors.cep &&
-    //     !formik.errors.rua &&
-    //     !formik.errors.numero &&
-    //     !formik.errors.bairro &&
-    //     !formik.errors.cidade &&
-    //     !formik.errors.estado)
-    // ) {
-    //   setStep(step + 1);
-    // }
-    // else if (step === 3 && escolaridade.length > 0) {
-    //   escolaridade.map((e) => {
-    //     if (!e.nivel || !e.descricao || !e.instituicao || !e.dataInicio || !e.dataFim) {
-    //       setErro(true);
-    //     } else {
-    //       setErro(false);
-    //     }
-    //   });
-    //   !erro ? setStep(step + 1) : console.log(escolaridade);
-    // }
   };
 
   const decrementaStep = () => {

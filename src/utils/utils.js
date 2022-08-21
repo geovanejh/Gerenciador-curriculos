@@ -5,3 +5,7 @@ export const limitFieldLength = (field, size) => {
     return field;
   }
 };
+
+export const formataNumeroFrontEnd = (cpf) => {
+  return `(${cpf.slice(0, 2)})${cpf.slice(2, 7)}-${cpf.slice(7, 11)}`;
+};
