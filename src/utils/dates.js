@@ -1,6 +1,6 @@
 import moment from "moment";
 
-export const formatDateToBackend = (date) => {
+export const formateDateToBackend = (date) => {
   return moment(date, "DD/MM/YYYY").format("YYYY-MM-DD");
 };
 

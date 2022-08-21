@@ -1,13 +1,11 @@
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { Logotipo } from "./Logo.styled";
+import DBCLogo from "../../../assets/DBCLogo.png";
 
-const Logo = ({ dispatch }) => {
-  const navigate = useNavigate();
-
+const Logo = () => {
   return (
     <Logotipo>
-      <img src="https://www.dbccompany.com.br/wp-content/uploads/2021/12/DBC-LOGO-Branco.png" alt="" />
+      <img src={DBCLogo} alt="" />
     </Logotipo>
   );
 };

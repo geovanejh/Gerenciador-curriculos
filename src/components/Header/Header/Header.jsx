@@ -4,7 +4,7 @@ import { handleLogout } from "../../../store/actions/AuthAction";
 import { Button } from "../../Button/Button.styled";
 import Logo from "../Logo/Logo";
 import Nav from "../Nav/Nav";
-import { HeaderContainer } from "./Header.stytled";
+import { HeaderContainer } from "./Header.styled";
 
 const Header = ({ dispatch }) => {
   const navigate = useNavigate();
@@ -13,7 +13,6 @@ const Header = ({ dispatch }) => {
     <HeaderContainer>
       <header>
         <Logo />
-
         <div>
           <Nav />
           <Button primary onClick={() => handleLogout(dispatch, navigate)}>

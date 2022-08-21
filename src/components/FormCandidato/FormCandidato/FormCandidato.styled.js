@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-export const SteppedForm = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 1200px;
-  margin: auto;
-  height: 100vh;
-`;
-
 export const FormContainer = styled.form`
   width: 100%;
   border: 1px solid rgb(26, 178, 78);

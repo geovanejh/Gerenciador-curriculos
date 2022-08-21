@@ -1,10 +1,11 @@
 import { Button } from "../../Button/Button.styled";
+import { Container } from "../../PageStyles/Container";
 import AddressData from "../FormSteps/AddressData";
 import ExperienceData from "../FormSteps/ExperienceData";
 import PersonalData from "../FormSteps/PersonalData";
 import StudiesData from "../FormSteps/StudiesData";
 import Stepper from "../Stepper/Stepper";
-import { ButtonContainer, FormContainer, SteppedForm } from "./FormCandidato.styled";
+import { ButtonContainer, FormContainer } from "./FormCandidato.styled";
 
 const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade, experiencia, setExperiencia }) => {
   const incrementaStep = () => {
@@ -68,7 +69,7 @@ const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade, e
   };
 
   return (
-    <SteppedForm>
+    <Container>
       <Stepper step={step} setStep={setStep} />
       <FormContainer onSubmit={formik.handleSubmit}>
         {step === 1 && <PersonalData formik={formik} />}
@@ -97,7 +98,7 @@ const FormCandidato = ({ step, setStep, formik, escolaridade, setEscolaridade, e
           )}
         </ButtonContainer>
       </FormContainer>
-    </SteppedForm>
+    </Container>
   );
 };
 export default FormCandidato;

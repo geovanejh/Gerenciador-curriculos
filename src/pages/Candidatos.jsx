@@ -1,12 +1,11 @@
-import moment from "moment";
 import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button/Button.styled";
-import { CandidatosContainer } from "../components/CandidatosContainer/CandidatosContainer.styled";
 import CandidatosList from "../components/CandidatosList/CandidatosList";
 import Loading from "../components/Loading/Loading";
+import { Container } from "../components/PageStyles/Container";
 import { PageContainerTitle } from "../components/PageStyles/PageContainerTitle";
 import { PageContainerWithBorder } from "../components/PageStyles/PageContainerWithBorder";
 import PaginadorButtons from "../components/Paginador/PaginadorButtons";
@@ -23,7 +22,7 @@ const Candidatos = ({ dispatch, applicants, loading }) => {
   };
 
   const handleDeleteCandidato = (idCandidato) => {
-    DeletaCandidatoById(idCandidato, dispatch);
+    DeletaCandidatoById(idCandidato, dispatch, currentPage, setPages);
   };
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const Candidatos = ({ dispatch, applicants, loading }) => {
   return loading ? (
     <Loading />
   ) : (
-    <CandidatosContainer>
+    <Container>
       <PageContainerTitle>Candidatos cadastrados no sistema</PageContainerTitle>
       <PageContainerWithBorder>
         <Button primary onClick={() => navigate("/candidatos/form")}>
@@ -44,7 +43,7 @@ const Candidatos = ({ dispatch, applicants, loading }) => {
           <PaginadorButtons pages={pages} setCurrentPage={setCurrentPage} currentPage={currentPage} />
         </Pager>
       </PageContainerWithBorder>
-    </CandidatosContainer>
+    </Container>
   );
 };
 

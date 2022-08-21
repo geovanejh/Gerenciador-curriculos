@@ -37,7 +37,7 @@ export const handleLogout = (dispatch, navigate) => {
 export const handleRegister = async (values, dispatch, navigate) => {
   setLoading(dispatch);
   try {
-    const { data } = await api.post(`/login/criar-usuario`, values);
+    await api.post(`/login/criar-usuario`, values);
     toast.success("Registrado com sucesso!");
     navigate("/login");
   } catch (error) {

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../components/Loading/Loading";
 import { handleLogout } from "../store/actions/AuthAction";
 import ListOpenJobs from "../components/ListOpenJobs/ListOpenJobsComponent";
-import DashboardContainer from "./Dashboard.style";
 
 const Dashboard = ({ loading, dispatch }) => {
   const navigate = useNavigate();
@@ -12,9 +11,7 @@ const Dashboard = ({ loading, dispatch }) => {
     <Loading />
   ) : (
     <div>
-      <DashboardContainer>
-        <ListOpenJobs />
-      </DashboardContainer>
+      <ListOpenJobs />
       <button onClick={() => handleLogout(dispatch, navigate)}>deslogar</button>
     </div>
   );

@@ -1,5 +1,5 @@
 import { getCepData } from "../../../store/actions/ApplicantAction";
-import { ESTADOS } from "../../../utils/lists";
+import { ESTADOS } from "../../../utils/utils";
 import { maskCEP, maskOnlyNumbers } from "../../../utils/masks";
 import FormField from "../../Forms/FormField/FormField";
 import { FormRow } from "../../Forms/FormRow";

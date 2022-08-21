@@ -29,6 +29,7 @@ const Router = ({ dispatch, auth }) => {
             <Route path="/candidatos/" element={<Candidatos />} />
             <Route path="/candidatos/form" element={<CandidatoForm />} />
             <Route path="/candidatos/form/:id" element={<CandidatoForm />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </>
         ) : (
           <>

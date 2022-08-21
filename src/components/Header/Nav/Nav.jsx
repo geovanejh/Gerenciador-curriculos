@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
-import { NavbarContainer } from "./Nav.styled";
 
 const Nav = () => {
   return (
-    <NavbarContainer>
+    <nav>
       <ul>
         <Link to="/"> Dashboard </Link>
         <Link to="/candidatos"> Candidatos </Link>
       </ul>
-    </NavbarContainer>
+    </nav>
   );
 };
 export default Nav;

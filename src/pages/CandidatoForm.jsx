@@ -7,10 +7,10 @@ import FormCandidato from "../components/FormCandidato/FormCandidato/FormCandida
 import Loading from "../components/Loading/Loading";
 import * as Yup from "yup";
 import { FillApplicantFields, handleCreateNewApplicant, handleEditApplicant } from "../store/actions/ApplicantAction";
-import { formatDateToBackend, formateDateToBrazil } from "../utils/dates";
+import { formateDateToBackend } from "../utils/dates";
 import { maskOnlyNumbers } from "../utils/masks";
 
-const CandidatoForm = ({ applicant, dispatch, loading }) => {
+const CandidatoForm = ({ dispatch, loading }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [step, setStep] = useState(1);
@@ -52,17 +52,17 @@ const CandidatoForm = ({ applicant, dispatch, loading }) => {
     }),
     onSubmit: (values) => {
       const scholarity = escolaridade.map((e) => {
-        return { ...e, dataInicio: formatDateToBackend(e.dataInicio), dataFim: formatDateToBackend(e.dataFim) };
+        return { ...e, dataInicio: formateDateToBackend(e.dataInicio), dataFim: formateDateToBackend(e.dataFim) };
       });
 
       const experience = experiencia.map((e) => {
-        return { ...e, dataInicio: formatDateToBackend(e.dataInicio), dataFim: formatDateToBackend(e.dataFim) };
+        return { ...e, dataInicio: formateDateToBackend(e.dataInicio), dataFim: formateDateToBackend(e.dataFim) };
       });
 
       const newObj = {
         nome: values.nome.trim(),
         cpf: maskOnlyNumbers(values.cpf),
-        dataNascimento: formatDateToBackend(values.dataNascimento),
+        dataNascimento: formateDateToBackend(values.dataNascimento),
         telefone: maskOnlyNumbers(values.telefone),
         senioridade: values.senioridade,
         cargo: values.cargo,

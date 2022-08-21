@@ -1,11 +1,10 @@
 import { toast } from "react-toastify";
 import moment from "moment";
-
 import { ActionTypes } from "../ActionTypes";
 import { api, cepApi } from "../../api";
 import { setLoading } from "./UtilsAction";
-import { maskCEP, maskCPF, maskPhone } from "../../utils/masks";
-import { formatDateToBackend, formateDateToBrazil } from "../../utils/dates";
+import { maskCEP, maskCPF } from "../../utils/masks";
+import { formateDateToBrazil } from "../../utils/dates";
 import { formataNumeroFrontEnd } from "../../utils/utils";
 
 export const HandleGetApplicantDetail = async (dispatch, idCanditado) => {
@@ -234,10 +233,10 @@ export const handleCreateNewApplicant = async (formData, dispatch, navigate) => 
   setLoading(dispatch);
 };
 
-export const DeletaCandidatoById = async (idCandidato, dispatch) => {
+export const DeletaCandidatoById = async (idCandidato, dispatch, currentPage, setPages) => {
   try {
-    const { data } = await api.delete(`candidato/${idCandidato}`);
-    HandleListApplicants(dispatch);
+    await api.delete(`candidato/${idCandidato}`);
+    getApplicantsWithPagination(dispatch, currentPage, setPages);
     toast.success("Candidato deletado com sucesso!");
   } catch (error) {
     toast.error("Não foi possível deletar o candidato, tente novamente!");
