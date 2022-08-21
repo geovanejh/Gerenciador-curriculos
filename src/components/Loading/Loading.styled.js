@@ -21,8 +21,8 @@ export const LoadingSpinner = styled.div`
   > div {
     width: 50px;
     height: 50px;
-    border: 5px solid #f3f3f3; /* Light grey */
-    border-top: 5px solid #0f62fe; /* Black */
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #0f62fe;
     border-radius: 50%;
     animation: ${spinner} 1s linear infinite;
   }

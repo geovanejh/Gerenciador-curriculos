@@ -5,7 +5,6 @@ export const Input = styled.input`
   border: ${(props) => (props.errors && props.touched ? "1px solid red" : "1px solid #9fa2b4")};
   border-radius: 8px;
   padding: 8px 16px;
-  /* width: ${(props) => (props.width ? props.width : "316px")}; */
   height: 42px;
 
   ::placeholder {

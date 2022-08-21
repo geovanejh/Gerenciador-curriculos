@@ -5,7 +5,6 @@ export const Lista = styled.ul`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 0.3fr;
     padding: 12px;
-    /* border-bottom: 1px solid rgb(223, 224, 235); */
 
     > div {
       display: flex;

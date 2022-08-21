@@ -180,8 +180,13 @@ export const handleEditApplicant = async (newObj, id, dispatch, navigate) => {
     toast.success("Candidato editado com sucesso!");
     navigate(-1);
   } catch (error) {
-    console.log(error);
-    toast.error("Um erro aconteceu!");
+    if (error.response.data.errors.length > 0) {
+      error.response.data.errors.map((e) => {
+        toast.error(e);
+      });
+    } else {
+      toast.error("Um erro aconteceu!");
+    }
   }
   setLoading(dispatch);
 };
