@@ -48,7 +48,7 @@ const ExperienceData = ({ formik, experiencia, setExperiencia }) => {
   return (
     <DinamicFormContent>
       {experiencia.map((item, index) => (
-        <div>
+        <div key={index}>
           <FormRow grid="1fr 1fr 150px 150px">
             <FormField
               label="instituicao"

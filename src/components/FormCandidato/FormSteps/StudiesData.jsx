@@ -49,7 +49,7 @@ const StudiesData = ({ formik, escolaridade, setEscolaridade }) => {
   return (
     <DinamicFormContent>
       {escolaridade.map((item, index) => (
-        <div>
+        <div key={index}>
           <FormRow grid="0.5fr 1fr">
             <SelectField
               formik={formik}

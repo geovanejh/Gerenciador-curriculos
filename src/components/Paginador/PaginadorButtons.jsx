@@ -31,7 +31,7 @@ const PaginadorButtons = ({ pages, setCurrentPage, currentPage }) => {
           </PaginadorButton>
         );
       })}
-      <PaginadorButton onClick={() => incrementaPaginador()}>
+      <PaginadorButton onClick={() => incrementaPaginador()} id="proximaPagina">
         <BsChevronRight />
       </PaginadorButton>
     </>
