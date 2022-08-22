@@ -44,7 +44,7 @@ const CandidatoForm = ({ dispatch, loading }) => {
       senioridade: Yup.string().required("- Obrigatório"),
       personalFile: !id && Yup.string().required("- Obrigatório"),
       cep: Yup.string().min(9, "- Formato incorreto.").max(9, "- Formato incorreto.").required("- Obrigatório."),
-      rua: Yup.string().max(30, "- Longo demais.").required("- Obrigatório."),
+      rua: Yup.string().required("- Obrigatório."),
       numero: Yup.string().required("- Obrigatório."),
       bairro: Yup.string().required("- Obrigatório."),
       cidade: Yup.string().required("- Obrigatório."),
