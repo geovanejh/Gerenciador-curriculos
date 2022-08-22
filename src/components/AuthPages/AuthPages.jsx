@@ -4,7 +4,7 @@ const AuthPages = ({ form, img, button, handleButton }) => {
   return (
     <AuthPage>
       <ImageContainer>
-        <button onClick={handleButton} id="buttonConfirm">
+        <button onClick={handleButton} id="buttonChangePage">
           {button}
         </button>
         <img src={img}></img>

@@ -49,7 +49,7 @@ const LoginForm = ({ dispatch }) => {
           onBlur={formik.handleBlur}
           formik={formik}
         />
-        <Button primary type="submit">
+        <Button primary type="submit" id="ButtonLogin">
           Login
         </Button>
       </AuthForm>

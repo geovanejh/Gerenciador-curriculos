@@ -73,7 +73,7 @@ const RegisterForm = ({ dispatch }) => {
           onBlur={formik.handleBlur}
           formik={formik}
         />
-        <Button primary type="submit">
+        <Button primary type="submit" id="RegisterForm">
           Registrar-se
         </Button>
       </AuthForm>
