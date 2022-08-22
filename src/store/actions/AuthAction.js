@@ -16,7 +16,7 @@ export const handleLogin = async (values, dispatch, navigate) => {
       isLogged: true,
       isLoading: false,
     });
-
+    toast.success("Seja bem-vindo!");
     navigate("/");
   } catch (error) {
     toast.error(`Usuário incorreto ou inexistente!`);
