@@ -20,8 +20,8 @@ const CandidatosList = ({ applicants, handleDeleteCandidato }) => {
         <p>Senioridade</p>
         <p>Data de nascimento</p>
       </li>
-      {applicants.map((e) => (
-        <li onClick={() => navigate(`/candidato/${e.id}`)}>
+      {applicants.map((e, i) => (
+        <li onClick={() => navigate(`/candidato/${e.id}`)} key={i}>
           <p>{limitFieldLength(e.name, 20)}</p>
           <p>{e.role}</p>
           <p>{e.seniority}</p>
