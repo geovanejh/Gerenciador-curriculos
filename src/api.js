@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://gerenciador-curriculo-teste.herokuapp.com/",
+  baseURL: "https://gerenciador-curriculo.herokuapp.com/",
 });
 
 export const cepApi = axios.create({
