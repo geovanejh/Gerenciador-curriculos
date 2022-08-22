@@ -6,7 +6,12 @@ import { HandleListApplicants } from "../../store/actions/ApplicantAction";
 import JobCardComponent from "../JobCard/JobCardComponent";
 import Loading from "./../Loading/Loading";
 
-import { Container, PaginationContainer, Msg, GridContainer } from "./ListOpenJobsComponent.style";
+import {
+  Container,
+  PaginationContainer,
+  Msg,
+  GridContainer,
+} from "./ListOpenJobsComponent.style";
 
 const ListOpenJobs = ({ isLoading, jobs, dispatch, loading }) => {
   const handleLoadPage = (page) => {
@@ -27,15 +32,20 @@ const ListOpenJobs = ({ isLoading, jobs, dispatch, loading }) => {
   ) : (
     <Container>
       <Msg>Lista de vagas</Msg>
-      <GridContainer>{jobs && jobs.jobs.map((job, index) => <JobCardComponent job={job} key={index} />)}</GridContainer>
+      <GridContainer>
+        {jobs &&
+          jobs.jobs.map((job, index) => (
+            <JobCardComponent job={job} key={index} />
+          ))}
+      </GridContainer>
       <div>
         <PaginationContainer
           breakLabel="..."
-          nextLabel="Próx >"
+          nextLabel=">"
           onPageChange={handleLoadPage}
           pageRangeDisplayed={5}
           pageCount={jobs.totalPages | 0}
-          previousLabel="< Ant"
+          previousLabel="<"
           renderOnZeroPageCount={null}
         />
       </div>

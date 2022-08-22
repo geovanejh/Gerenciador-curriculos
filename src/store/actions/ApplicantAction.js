@@ -42,10 +42,16 @@ export const getCepData = async (cep, formik) => {
   }
 };
 
-export const getApplicantsWithPagination = async (dispatch, currentPage, setPages) => {
+export const getApplicantsWithPagination = async (
+  dispatch,
+  currentPage,
+  setPages
+) => {
   setLoading(dispatch);
   try {
-    const { data } = await api.get(`/candidato/list-candidato-paginado?pagina=${currentPage}&qtRegistro=10`);
+    const { data } = await api.get(
+      `/candidato/list-candidato-paginado?pagina=${currentPage}&qtRegistro=10`
+    );
     setPages(data.paginas);
     const applicants = {
       type: ActionTypes.listApplicants,
@@ -99,14 +105,7 @@ export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
   };
 
   try {
-    await api.post("/vaga", {
-      idVaga: jobId,
-      candidatos: [
-        {
-          idCandidato: applicantId,
-        },
-      ],
-    });
+    await api.post(`/vaga/vincular/vaga/${jobId}/candidato/${applicantId}`);
 
     toast.success("Candidato vinculado com sucesso!");
   } catch (error) {
@@ -117,7 +116,11 @@ export const HandleAddAplicantToJob = async (dispatch, jobId, applicantId) => {
   dispatch(applyJobStatus);
 };
 
-export const HandleUnlinkAplicantToJob = async (dispatch, jobId, applicantId) => {
+export const HandleUnlinkAplicantToJob = async (
+  dispatch,
+  jobId,
+  applicantId
+) => {
   let applyJobStatus = {
     type: ActionTypes.unlinkJob,
     unlinkJobStatus: true,
@@ -211,7 +214,11 @@ export const editApplicantFile = async (id, file, dispatch, navigate) => {
   }
 };
 
-export const handleCreateNewApplicant = async (formData, dispatch, navigate) => {
+export const handleCreateNewApplicant = async (
+  formData,
+  dispatch,
+  navigate
+) => {
   setLoading(dispatch);
   try {
     await api.post("/candidato", formData, {
@@ -233,7 +240,12 @@ export const handleCreateNewApplicant = async (formData, dispatch, navigate) => 
   setLoading(dispatch);
 };
 
-export const DeletaCandidatoById = async (idCandidato, dispatch, currentPage, setPages) => {
+export const DeletaCandidatoById = async (
+  idCandidato,
+  dispatch,
+  currentPage,
+  setPages
+) => {
   try {
     await api.delete(`candidato/${idCandidato}`);
     getApplicantsWithPagination(dispatch, currentPage, setPages);
@@ -243,13 +255,22 @@ export const DeletaCandidatoById = async (idCandidato, dispatch, currentPage, se
   }
 };
 
-export const FillApplicantFields = async (idCandidato, formik, setExperiencia, setEscolaridade, dispatch) => {
+export const FillApplicantFields = async (
+  idCandidato,
+  formik,
+  setExperiencia,
+  setEscolaridade,
+  dispatch
+) => {
   setLoading(dispatch);
   try {
     const { data } = await api.get(`/candidato/get-candidato/${idCandidato}`);
     formik.setFieldValue("nome", data.nome);
     formik.setFieldValue("cpf", maskCPF(data.cpf));
-    formik.setFieldValue("dataNascimento", formateDateToBrazil(data.dataNascimento));
+    formik.setFieldValue(
+      "dataNascimento",
+      formateDateToBrazil(data.dataNascimento)
+    );
     formik.setFieldValue("telefone", formataNumeroFrontEnd(data.telefone));
     formik.setFieldValue("cargo", data.cargo);
     formik.setFieldValue("senioridade", data.senioridade);
@@ -261,11 +282,19 @@ export const FillApplicantFields = async (idCandidato, formik, setExperiencia, s
     formik.setFieldValue("estado", data.endereco.estado);
 
     const scholarity = data.escolaridade.map((e) => {
-      return { ...e, dataInicio: formateDateToBrazil(e.dataInicio), dataFim: formateDateToBrazil(e.dataFim) };
+      return {
+        ...e,
+        dataInicio: formateDateToBrazil(e.dataInicio),
+        dataFim: formateDateToBrazil(e.dataFim),
+      };
     });
 
     const experience = data.experiencia.map((e) => {
-      return { ...e, dataInicio: formateDateToBrazil(e.dataInicio), dataFim: formateDateToBrazil(e.dataFim) };
+      return {
+        ...e,
+        dataInicio: formateDateToBrazil(e.dataInicio),
+        dataFim: formateDateToBrazil(e.dataFim),
+      };
     });
 
     setEscolaridade(scholarity);

@@ -12,7 +12,6 @@ const Dashboard = ({ loading, dispatch }) => {
   ) : (
     <div>
       <ListOpenJobs />
-      <button onClick={() => handleLogout(dispatch, navigate)}>deslogar</button>
     </div>
   );
 };
