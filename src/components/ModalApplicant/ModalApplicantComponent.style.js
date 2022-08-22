@@ -79,7 +79,7 @@ const CardFechar = styled.div`
   display: flex;
   justify-content: space-between;
   padding-bottom: 15px;
-
+  background: white;
   position: sticky;
   z-index: 999;
   top: -15px;
