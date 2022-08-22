@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Loading from "../Loading/Loading";
 import { Container } from "../PageStyles/Container";
 import { PageContainerTitle } from "../PageStyles/PageContainerTitle";
-import { PageContainerWithBorder } from "../PageStyles/PageContainerWithBorder";
+import { BackButton, PageContainerWithBorder } from "../PageStyles/PageContainerWithBorder";
 import { Group } from "../PageStyles/Group";
 import { maskPhone } from "../../utils/masks";
 import { Field } from "../PageStyles/Field";
@@ -34,6 +34,7 @@ const ApplicantDetailsComponent = ({ applicantId, dispatch, applicant, loading }
     <Container>
       <PageContainerTitle>Detalhe do Candidato </PageContainerTitle>
       <PageContainerWithBorder>
+        <BackButton onClick={() => navigate(-1)}>voltar</BackButton>
         {applicant.id ? (
           <div key={applicant.id}>
             <Group>
